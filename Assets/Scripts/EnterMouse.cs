@@ -14,12 +14,15 @@ public class EnterMouse : MonoBehaviour {
 
     void OnMouseExit()
     {
-        if(gameObject.GetComponent<Cell>() == null && entermouse){
+        if(gameObject.GetComponent<Cell>() == null){
         gameObject.GetComponent<Outline>().enabled = false;
         }
-        else if (gameObject.GetComponent<Cell>().cell == true && entermouse){
+        else if (gameObject.GetComponent<Cell>().cell == false){
+          gameObject.GetComponent<Outline>().enabled = true;
+         }
+        else if (gameObject.GetComponent<Cell>().cell == true){
             gameObject.GetComponent<Outline>().enabled = false;
-        }
+         }
 
     }
 
