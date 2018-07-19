@@ -74,126 +74,162 @@ public class Moves: MonoBehaviour {
 			// }
 
 
-			if (gameObject.GetComponent < Figure > ().choisefigure.name.Contains("knight")) {
-				String s = gameObject.GetComponent < Figure > ().choisefigure.GetComponent < Trig > ().triger.name;
-				String first = s.Substring(0, 1);
-				Debug.Log(first);
-				String stringsecond = s.Substring(1, 1);
+			// if (gameObject.GetComponent < Figure > ().choisefigure.name.Contains("knight")) {
+			// 	String s = gameObject.GetComponent < Figure > ().choisefigure.GetComponent < Trig > ().triger.name;
+			// 	String first = s.Substring(0, 1);
+			// 	Debug.Log(first);
+			// 	String stringsecond = s.Substring(1, 1);
 
 
 
-				int intsecond = Int32.Parse(stringsecond);
-				int upint = intsecond + 2;
-				int downint = intsecond - 2;
-				int leftrightintup = intsecond + 1;
-				int leftrightintdown = intsecond - 1;
-				int b = Array.IndexOf(gameObject.GetComponent < HiddenGO > ().letters, first);
+			// 	int intsecond = Int32.Parse(stringsecond);
+			// 	int upint = intsecond + 2;
+			// 	int downint = intsecond - 2;
+			// 	int leftrightintup = intsecond + 1;
+			// 	int leftrightintdown = intsecond - 1;
+			// 	int b = Array.IndexOf(gameObject.GetComponent < HiddenGO > ().letters, first);
 
-				ArrayList cell = new ArrayList();
+			// 	ArrayList cell = new ArrayList();
 
-				if (b - 1 > -1) {
-					String upStringLeft = gameObject.GetComponent < HiddenGO > ().letters[b - 1];
+			// 	if (b - 1 >= 0) {
+			// 		String upStringLeft = gameObject.GetComponent < HiddenGO > ().letters[b - 1];
+                    
+			// 		if(intsecond + 2 <= 8){
+			// 		String finalUpStringLeft = upStringLeft + upint.ToString();
+			// 		cell.Add(finalUpStringLeft);
+			// 		}
 
-					String finalUpStringLeft = upStringLeft + upint.ToString();
+            //         if(intsecond - 2 >= 1){
+			// 		String finalDownStringLeft = upStringLeft + downint.ToString();
+			// 		cell.Add(finalDownStringLeft);
+ 
+			// 	}
+			// 	}
 
-					String finalDownStringLeft = upStringLeft + downint.ToString();
-					//    cell.Add(finalUpStringLeft);
-					//    cell.Add(finalDownStringLeft);
-				}
+			// 	if (b - 2 >= 0) {
+			// 		String stringLeft = gameObject.GetComponent < HiddenGO > ().letters[b - 2];
+			// 		if(intsecond + 1 <= 8){
+			// 		String finalStringLeftup = stringLeft + leftrightintup.ToString();
+			// 		cell.Add(finalStringLeftup);
+			// 		}
 
-				if (b - 2 > -1) {
-					String stringLeft = gameObject.GetComponent < HiddenGO > ().letters[b - 2];
-					String finalStringLeftup = stringLeft + leftrightintup.ToString();
-					String finalStringLeftdown = stringLeft + leftrightintdown.ToString();
-					// cell.Add(finalStringLeftup);
-					// cell.Add(finalStringLeftdown);
-				}
+			// 		if(intsecond - 1 >= 1){
+			// 		String finalStringLeftdown = stringLeft + leftrightintdown.ToString();
+			// 		cell.Add(finalStringLeftdown);
+			// 		}
+				
+				
+			// 	}
 
-				if (b + 1 < 8) {
-					String upStringRight = gameObject.GetComponent < HiddenGO > ().letters[b + 1];
-					Debug.Log(upStringRight);
-					String finalUpStringRight = upStringRight + upint.ToString();
-					Debug.Log(finalUpStringRight);
-					String finalDownStringRight = upStringRight + downint.ToString();
-					cell.Add(finalUpStringRight);
-					// cell.Add(finalDownStringRight);
-				}
+			// 	if (b + 1 <= 7) {
+			// 		String upStringRight = gameObject.GetComponent < HiddenGO > ().letters[b + 1];
+					
+			// 		if(intsecond + 2 <= 8){
+			// 		String finalUpStringRight = upStringRight + upint.ToString();
+			// 		cell.Add(finalUpStringRight);
+			// 		}
+					
+			// 		if(intsecond - 2 >= 1){
+			// 		String finalDownStringRight = upStringRight + downint.ToString();
+			// 		cell.Add(finalDownStringRight);
+			// 		}
+			// 	}
 
-				if (b + 2 < 8) {
-					String stringRight = gameObject.GetComponent < HiddenGO > ().letters[b + 2];
-					String finalStringRightup = stringRight + leftrightintup.ToString();
-					String finalStringRightdown = stringRight + leftrightintdown.ToString();
-					// cell.Add(finalStringRightup);
-					// cell.Add(finalStringRightdown);
-				}
+			// 	if (b + 2 <= 7) {
+			// 		String stringRight = gameObject.GetComponent < HiddenGO > ().letters[b + 2];
+			// 		if(intsecond + 1 <= 8){
+			// 		String finalStringRightup = stringRight + leftrightintup.ToString();
+			// 		cell.Add(finalStringRightup);
+			// 		}
 
-				foreach(String prefecs in cell) {
-					if (prefecs != null) {
-						GameObject.Find(prefecs).GetComponent < Outline > ().enabled = true;
-						GameObject.Find(prefecs).GetComponent < Cell > ().cell = false;
-					}
-				}
+			// 		if(intsecond - 1 >= 1){
+			// 		String finalStringRightdown = stringRight + leftrightintdown.ToString();
+			// 		cell.Add(finalStringRightdown);
+			// 		}
 
-				gameObject.GetComponent < Figure > ().camera.GetComponent < Moves > ().enabled = false;
-				gameObject.GetComponent < Figure > ().moves = false;
+			// 	}
 
-			}
+			// 	foreach(String prefecs in cell) {
+			// 		if (prefecs != null) {
+			// 			GameObject.Find(prefecs).GetComponent < Outline > ().enabled = true;
+			// 			GameObject.Find(prefecs).GetComponent < Cell > ().cell = false;
+			// 		}
+			// 	}
 
+			// 	gameObject.GetComponent < Figure > ().camera.GetComponent < Moves > ().enabled = false;
+			// 	gameObject.GetComponent < Figure > ().moves = false;
 
-
-			if (gameObject.GetComponent < Figure > ().choisefigure.name.Contains("bishop")) {
-				String s = gameObject.GetComponent < Figure > ().choisefigure.GetComponent < Trig > ().triger.name;
-				String first = s.Substring(0, 1);
-				String stringsecond = s.Substring(1, 1);
-				int a = Int32.Parse(stringsecond);
-				int b = Array.IndexOf(gameObject.GetComponent < HiddenGO > ().letters, first);
-
-				ArrayList cell = new ArrayList();
-
-				for (int i = 1; i < 8; i++) {
-					int c = b + i;
-					if (c < gameObject.GetComponent < HiddenGO > ().letters.Length) {
-						String e = gameObject.GetComponent < HiddenGO > ().letters[c];
-						int r = a + i;
-						String upright = e + r.ToString();
-						int t = a - i;
-						String downright = e + t.ToString();
-						cell.Add(upright);
-						cell.Add(downright);
-					} else continue;
-
+			// }
 
 
 
+			// if (gameObject.GetComponent < Figure > ().choisefigure.name.Contains("bishop")) {
+			// 	String s = gameObject.GetComponent < Figure > ().choisefigure.GetComponent < Trig > ().triger.name;
+			// 	String first = s.Substring(0, 1);
+			// 	String stringsecond = s.Substring(1, 1);
+			// 	int a = Int32.Parse(stringsecond);
+			// 	int b = Array.IndexOf(gameObject.GetComponent < HiddenGO > ().letters, first);
 
-					int g = b - i;
-					if (g >= 0) {
-						String h = gameObject.GetComponent < HiddenGO > ().letters[g];
-						int u = a + i;
-						int m = a - i;
-						String upleft = h + u.ToString();
-						String downleft = h + m.ToString();
-						cell.Add(upleft);
-						cell.Add(downleft);
-					} else continue;
+			// 	ArrayList cell = new ArrayList();
+
+			// 	for (int i = 1; i < 8; i++) {
+
+			// 		int c = b + i;
+					
+			// 		if (c <=7 ) {
+			// 			String e = gameObject.GetComponent < HiddenGO > ().letters[c];
+			// 			int r = a + i;
+			// 			if (r <=7){
+			// 			String upright = e + r.ToString();
+			// 			cell.Add(upright);
+			// 			}
+
+			// 			int t = a - i;
+
+			// 			if (t >=1){
+			// 			String downright = e + t.ToString();
+			// 			cell.Add(downright);
+			// 		} else continue;
 
 
 
 
 
-				}
+			// 		int g = b - i;
+			// 		if (g >= 0) {
+			// 			String h = gameObject.GetComponent < HiddenGO > ().letters[g];
+
+			// 			int u = a + i;
+			// 			if (u <=7){	
+			// 			String upleft = h + u.ToString();
+			// 			cell.Add(upleft);
+			// 			}
+                        
+			// 			int m = a - i;
+			// 			if (m >=1){
+			// 			String downleft = h + m.ToString();
+			// 			cell.Add(downleft);
+			// 		} else continue;
 
 
 
-				foreach(String prefecs in cell) {
-					GameObject.Find(prefecs).GetComponent < Outline > ().enabled = true;
-					GameObject.Find(prefecs).GetComponent < Cell > ().cell = false;;
-				}
 
-				gameObject.GetComponent < Figure > ().camera.GetComponent < Moves > ().enabled = false;
-				gameObject.GetComponent < Figure > ().moves = false;
 
-			}
+			// 	}
+			// 		}
+			// 	}
+
+
+
+			// 	foreach(String prefecs in cell) {
+			// 		GameObject.Find(prefecs).GetComponent < Outline > ().enabled = true;
+			// 		GameObject.Find(prefecs).GetComponent < Cell > ().cell = false;;
+			// 	}
+
+			// 	gameObject.GetComponent < Figure > ().camera.GetComponent < Moves > ().enabled = false;
+			// 	gameObject.GetComponent < Figure > ().moves = false;
+
+			// }
 
 
 			if (gameObject.GetComponent < Figure > ().choisefigure.name.Contains("queen")) {
@@ -216,49 +252,64 @@ public class Moves: MonoBehaviour {
 					cell.Add(g);
 				}
 
-
+				
+			
 				int a = Int32.Parse(stringsecond);
 				int b = Array.IndexOf(gameObject.GetComponent < HiddenGO > ().letters, first);
 
+				
 				for (int i = 1; i < 8; i++) {
+
 					int c = b + i;
-					if (c < gameObject.GetComponent < HiddenGO > ().letters.Length) {
+					
+					if (c <=7 ) {
 						String e = gameObject.GetComponent < HiddenGO > ().letters[c];
 						int r = a + i;
+						if (r <=7){
 						String upright = e + r.ToString();
-						int t = a - i;
-						String downright = e + t.ToString();
 						cell.Add(upright);
+						}
+
+						int t = a - i;
+
+						if (t >=1){
+						String downright = e + t.ToString();
 						cell.Add(downright);
 					} else continue;
-
-
+					}
 
 					int g = b - i;
 					if (g >= 0) {
 						String h = gameObject.GetComponent < HiddenGO > ().letters[g];
+
 						int u = a + i;
-						int m = a - i;
+						if (u <=7){	
 						String upleft = h + u.ToString();
-						String downleft = h + m.ToString();
 						cell.Add(upleft);
+						}
+                        
+						int m = a - i;
+						if (m >=1){
+
+						String downleft = h + m.ToString();
 						cell.Add(downleft);
-					} else continue;
-
-
-
-					foreach(String prefecs in cell) {
-						GameObject.Find(prefecs).GetComponent < Outline > ().enabled = true;
-						GameObject.Find(prefecs).GetComponent < Cell > ().cell = false;;
+					}
+					 else continue;
 					}
 
-
-
-
-					gameObject.GetComponent < Figure > ().camera.GetComponent < Moves > ().enabled = false;
-					gameObject.GetComponent < Figure > ().moves = false;
+				foreach(String prefecs in cell) {
+					GameObject.Find(prefecs).GetComponent < Outline > ().enabled = true;
+					GameObject.Find(prefecs).GetComponent < Cell > ().cell = false;;
 				}
-			}
+
+
+				gameObject.GetComponent < Figure > ().camera.GetComponent < Moves > ().enabled = false;
+				gameObject.GetComponent < Figure > ().moves = false;
+
+				}
+					}
+				}
+				
 
 
 
@@ -273,36 +324,66 @@ public class Moves: MonoBehaviour {
 
 				int intsecond = Int32.Parse(stringsecond);
 
-				int up = intsecond + 1;
-				int down = intsecond - 1;
+	
 				int b = Array.IndexOf(gameObject.GetComponent < HiddenGO > ().letters, first);
 
 				ArrayList cell = new ArrayList();
 
-				if (b - 1 > -1) {
-					String Left = gameObject.GetComponent < HiddenGO > ().letters[b - 1];
-
-					String LeftCell = Left + stringsecond;
-					String LeftCellUp = Left + up.ToString();
-					String LeftCellDown = Left + down.ToString();
-
-					cell.Add(LeftCell);
-					cell.Add(LeftCellUp);
-					cell.Add(LeftCellDown);
+					
+				int upint = intsecond + 1;
+				int downint = intsecond - 1;;
+		
+				
+                if(intsecond + 1 <=8){
+				String finalUp = first + upint.ToString();
+			    cell.Add(finalUp);
 				}
 
-				if (b + 1 < 8) {
-					String Right = gameObject.GetComponent < HiddenGO > ().letters[b + 1];
-
-					String RightCell = Right + stringsecond;
-					String RightCellUp = Right + up.ToString();
-					String RightCellDown = Right + down.ToString();
-
-					cell.Add(RightCell);
-					cell.Add(RightCellUp);
-					cell.Add(RightCellDown);
+		        		
+                if(intsecond - 1 >= 1){
+				String finalDown = first + downint.ToString();
+			    cell.Add(finalDown);
 				}
 
+				if (b - 1 >= 0) {
+					String upStringLeft = gameObject.GetComponent < HiddenGO > ().letters[b - 1];
+                    
+					if(intsecond + 1 <= 8){
+					String finalUpStringLeft = upStringLeft + upint.ToString();
+					String finalLeft = upStringLeft + intsecond.ToString();
+					cell.Add(finalUpStringLeft);
+					cell.Add(finalLeft);
+					}
+
+                    if(intsecond - 1 >= 1){
+					String finalDownStringLeft = upStringLeft + downint.ToString();
+					cell.Add(finalDownStringLeft);
+ 
+				}
+				}
+
+
+				if (b + 1 <= 7) {
+					String upStringRight = gameObject.GetComponent < HiddenGO > ().letters[b + 1];
+					
+					if(intsecond + 1 <= 8){
+					String finalUpStringRight = upStringRight + upint.ToString();
+					String finalRight = upStringRight + intsecond.ToString();
+				
+					cell.Add(finalRight);
+					cell.Add(finalUpStringRight);
+
+					}
+					
+					if(intsecond - 1 >= 1){
+					String finalDownStringRight = upStringRight + downint.ToString();
+					cell.Add(finalDownStringRight);
+					}
+				}
+
+               		
+				
+				
 
 				foreach(String prefecs in cell) {
 					if (prefecs != null) {
@@ -315,7 +396,7 @@ public class Moves: MonoBehaviour {
 				gameObject.GetComponent < Figure > ().moves = false;
 
 			}
-		}
+		
 	}
 
 	}
