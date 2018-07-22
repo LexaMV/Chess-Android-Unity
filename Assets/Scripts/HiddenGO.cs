@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class HiddenGO : MonoBehaviour {
 public GameObject blackpawn;
@@ -18,20 +19,29 @@ public GameObject blackqueen;
 public GameObject whiteking;
 
 public GameObject[,] hiddengo;
-public float x = 9f;
-private float y = 1.0f;
-public float z = 9f;
+private float x;
+private float y;
+private float z;
 public string[] digit = {"1","2","3","4","5","6","7","8"};  
 public int digitint = 7;
 public int lettersint = 0;
 public string[] letters = {"A","B","C","D","E","F","G","H"};
 public bool black;
 public GameObject PrefabCell;
+public GameObject HalfCell;
+
+public GameObject FourthCell;
 	// Use this for initialization
 	void Start () {
+        x = 10.0f;
+		y = 1.0f;
+		z = 10.0f;
+
 		GameObject field = GameObject.Find("Field");
 		GameObject figures = GameObject.Find("Figures");
+
 		hiddengo = new GameObject[8,8];
+		
 		for(int i = 0; i < 8; i++){
             
 			if ( i == 0){
@@ -45,7 +55,8 @@ public GameObject PrefabCell;
 			}
 
 			for(int j = 0; j < 8; j++){
-				GameObject cell = Instantiate(PrefabCell, new Vector3(x,y,z), Quaternion.identity, field.transform);
+				 //GameObject cell = Instantiate(PrefabCell, new Vector3(x,y,z), Quaternion.identity, field.transform);
+				GameObject cell = Instantiate(PrefabCell, new Vector3(x,y,z), Quaternion.identity);
 			    cell.name = (letters[lettersint] + digit[digitint]);
 				if(black == false){
                 cell.GetComponent<Renderer>().material.color = Color.white;
@@ -63,8 +74,82 @@ public GameObject PrefabCell;
 			digitint -= 1;
 			black = true;
 			x = x - 2.50f;
-			z = 9f;
+			z = 10f;
 		}
+
+        x = 11.878f; 
+		y = 1.0f; 
+		z = 10.002f;
+		
+	
+
+       for(int i = 0; i < 8; i++){
+		 GameObject half = Instantiate(HalfCell, new Vector3(x,y,z), Quaternion.identity, field.transform);
+		//GameObject half = Instantiate(HalfCell, new Vector3(x,y,z), Quaternion.identity);
+		half.GetComponent<Renderer>().material.color = Color.black;
+		RectTransform rectTextMesh =  half.transform.Find("Canvas").gameObject.transform.Find("TextMesh").GetComponent<RectTransform>();
+		rectTextMesh.Rotate(new Vector3(0,0,90));
+        TextMeshProUGUI textMesh = half.transform.Find("Canvas").gameObject.transform.Find("TextMesh").GetComponent<TextMeshProUGUI>();
+        textMesh.text = letters[7-i]; 
+		z = z - 2.50f;
+	    }
+		
+		x = -9.375f; 
+		y = 1.0f; 
+		z = 10.002f;
+
+		for(int i = 0; i < 8; i++){
+		 GameObject half = Instantiate(HalfCell, new Vector3(x,y,z), Quaternion.identity, field.transform);
+		//GameObject half = Instantiate(HalfCell, new Vector3(x,y,z), Quaternion.identity);
+		half.GetComponent<Renderer>().material.color = Color.black;
+        RectTransform rectTextMesh =  half.transform.Find("Canvas").gameObject.transform.Find("TextMesh").GetComponent<RectTransform>();
+		rectTextMesh.Rotate(new Vector3(0,0,-90));
+        TextMeshProUGUI textMesh = half.transform.Find("Canvas").gameObject.transform.Find("TextMesh").GetComponent<TextMeshProUGUI>();
+        textMesh.text = letters[7-i]; 
+
+		z = z - 2.50f;
+	    }
+
+			x = -7.5f; 
+		y = 1.0f; 
+		z = 11.875f;
+
+		for(int i = 0; i < 8; i++){
+		 GameObject half = Instantiate(HalfCell, new Vector3(x,y,z), Quaternion.Euler(new Vector3(0,90f,0)), field.transform);
+		//GameObject half = Instantiate(HalfCell, new Vector3(x,y,z), Quaternion.Euler(new Vector3(0,90f,0)));
+		half.GetComponent<Renderer>().material.color = Color.black;
+        RectTransform rectTextMesh =  half.transform.Find("Canvas").gameObject.transform.Find("TextMesh").GetComponent<RectTransform>();
+		rectTextMesh.Rotate(new Vector3(0,0,0));
+        TextMeshProUGUI textMesh = half.transform.Find("Canvas").gameObject.transform.Find("TextMesh").GetComponent<TextMeshProUGUI>();
+        textMesh.text = digit[7-i]; 
+		x = x + 2.50f;
+		}
+				
+			x = -7.5f; 
+		y = 1.0f; 
+		z = -9.375f;
+
+		for(int i = 0; i < 8; i++){
+		 GameObject half = Instantiate(HalfCell, new Vector3(x,y,z), Quaternion.Euler(new Vector3(0,90f,0)), field.transform);
+		//GameObject half = Instantiate(HalfCell, new Vector3(x,y,z), Quaternion.Euler(new Vector3(0,90f,0)));
+		half.GetComponent<Renderer>().material.color = Color.black;
+		        RectTransform rectTextMesh =  half.transform.Find("Canvas").gameObject.transform.Find("TextMesh").GetComponent<RectTransform>();
+		rectTextMesh.Rotate(new Vector3(0,0,180));
+        TextMeshProUGUI textMesh = half.transform.Find("Canvas").gameObject.transform.Find("TextMesh").GetComponent<TextMeshProUGUI>();
+        textMesh.text = digit[7-i]; 
+		x = x + 2.50f;
+		}
+
+			GameObject fourth1 = Instantiate(FourthCell, new Vector3(-9.375f,1.0f,-9.375f), Quaternion.identity, field.transform);
+			fourth1.GetComponent<Renderer>().material.color = Color.black;
+			GameObject fourth2 = Instantiate(FourthCell, new Vector3(-9.375f,1.0f,11.875f), Quaternion.identity, field.transform);
+			fourth2.GetComponent<Renderer>().material.color = Color.black;
+			GameObject fourth3 = Instantiate(FourthCell, new Vector3(11.875f,1.0f,11.875f), Quaternion.identity, field.transform);
+			fourth3.GetComponent<Renderer>().material.color = Color.black;
+			GameObject fourth4 = Instantiate(FourthCell, new Vector3(11.875f,1.0f,-9.375f), Quaternion.identity, field.transform);
+			fourth4.GetComponent<Renderer>().material.color = Color.black;
+		
+
 
 		 foreach(GameObject go in hiddengo){
 		 	if(go.name.Contains("2")){

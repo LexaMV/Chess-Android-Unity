@@ -5,7 +5,22 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - blackpawn: {instanceID: 0}
+  - whitepawn: {instanceID: 0}
+  - blackrook: {instanceID: 0}
+  - whiterook: {instanceID: 0}
+  - blackhorse: {instanceID: 0}
+  - whitehorse: {instanceID: 0}
+  - blackbishop: {instanceID: 0}
+  - whitebishop: {instanceID: 0}
+  - blackking: {instanceID: 0}
+  - whitequeen: {instanceID: 0}
+  - blackqueen: {instanceID: 0}
+  - whiteking: {instanceID: 0}
+  - PrefabCell: {instanceID: 0}
+  - HalfPrefabCell: {fileID: 1232497257811946, guid: 1fd384a5c1cf8ce4287b31bb4ecfdc20,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
