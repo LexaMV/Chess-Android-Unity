@@ -55,8 +55,8 @@ public GameObject FourthCell;
 			}
 
 			for(int j = 0; j < 8; j++){
-				 //GameObject cell = Instantiate(PrefabCell, new Vector3(x,y,z), Quaternion.identity, field.transform);
-				GameObject cell = Instantiate(PrefabCell, new Vector3(x,y,z), Quaternion.identity);
+				GameObject cell = Instantiate(PrefabCell, new Vector3(x,y,z), Quaternion.identity, field.transform);
+				//GameObject cell = Instantiate(PrefabCell, new Vector3(x,y,z), Quaternion.identity);
 			    cell.name = (letters[lettersint] + digit[digitint]);
 				if(black == false){
                 cell.GetComponent<Renderer>().material.color = Color.white;
