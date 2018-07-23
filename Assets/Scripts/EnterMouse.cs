@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using cakeslice;
 using UnityEngine;
@@ -7,7 +7,10 @@ public class EnterMouse : MonoBehaviour {
     public bool entermouse = true;
 	void OnMouseEnter()
     {
-        if(entermouse){
+        if(gameObject.GetComponent<Cell>() == null){
+        gameObject.GetComponent<Outline>().enabled = false;
+        } 
+        else if(entermouse){
         gameObject.GetComponent<Outline>().enabled = true;
     }
     }
@@ -15,7 +18,7 @@ public class EnterMouse : MonoBehaviour {
     void OnMouseExit()
     {
         if(gameObject.GetComponent<Cell>() == null){
-        gameObject.GetComponent<Outline>().enabled = false;
+        gameObject.GetComponent<Outline>().enabled = false; 
         }
         else if (gameObject.GetComponent<Cell>().cell == false){
           gameObject.GetComponent<Outline>().enabled = true;

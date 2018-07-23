@@ -5,4 +5,5 @@ using UnityEngine;
 public class Cell : MonoBehaviour {
 
 	public bool cell = true;
+	public bool cellvibranadlaxoda = false;
 }
