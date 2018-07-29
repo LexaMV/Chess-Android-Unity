@@ -9,25 +9,25 @@ public class Figure: MonoBehaviour {
 	
 	public GameObject[] onOutline;
 	public bool moves = false; 
-	public bool xod = false;             // выбрана ли фигура для хода;
-	public bool xodincell = false;       // выбрана ли фигура с ячейкой куда она должна идти
+	public bool xod = false;             // РІС‹Р±СЂР°РЅР° Р»Рё С„РёРіСѓСЂР° РґР»СЏ С…РѕРґР°;
+	public bool xodincell = false;       // РІС‹Р±СЂР°РЅР° Р»Рё С„РёРіСѓСЂР° СЃ СЏС‡РµР№РєРѕР№ РєСѓРґР° РѕРЅР° РґРѕР»Р¶РЅР° РёРґС‚Рё
 	private float Speed = 4.0f;
 	public Camera camera; 
-	private bool figureischoise = false; //проверка была ли ранее какая либо выбрана фигура или нет
+	private bool figureischoise = false; //РїСЂРѕРІРµСЂРєР° Р±С‹Р»Р° Р»Рё СЂР°РЅРµРµ РєР°РєР°СЏ Р»РёР±Рѕ РІС‹Р±СЂР°РЅР° С„РёРіСѓСЂР° РёР»Рё РЅРµС‚
 	public GameObject choisefigure; 
-	public GameObject xodfigure;         // в какую ячейку пойдет фигура
+	public GameObject xodfigure;         // РІ РєР°РєСѓСЋ СЏС‡РµР№РєСѓ РїРѕР№РґРµС‚ С„РёРіСѓСЂР°
 	public bool XodIgroka1 = false;
 	public bool XodIgroka2 = false;
-	public String fromCell;              // с какой ячейки начинает ходить фигура
- 	public bool fromenabled = false;     // для string начальной ячейки
-	public String inCell;                // в какую ячейку идет фигура
-	public bool inenabled = false;       // для string конечной ячейки
+	public String fromCell;              // СЃ РєР°РєРѕР№ СЏС‡РµР№РєРё РЅР°С‡РёРЅР°РµС‚ С…РѕРґРёС‚СЊ С„РёРіСѓСЂР°
+ 	public bool fromenabled = false;     // РґР»СЏ string РЅР°С‡Р°Р»СЊРЅРѕР№ СЏС‡РµР№РєРё
+	public String inCell;                // РІ РєР°РєСѓСЋ СЏС‡РµР№РєСѓ РёРґРµС‚ С„РёРіСѓСЂР°
+	public bool inenabled = false;       // РґР»СЏ string РєРѕРЅРµС‡РЅРѕР№ СЏС‡РµР№РєРё
 	
 	void Update () {
 
 		// if(XodIgroka1 == false){
 			// TextMeshProUGUI textmesh = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
-			// textmesh.text = "Игрок 1";
+			// textmesh.text = "РРіСЂРѕРє 1";
 			
 		if(Input.GetMouseButtonDown(0)) {
 			
@@ -35,39 +35,39 @@ public class Figure: MonoBehaviour {
 			RaycastHit hit;
 			if(Physics.Raycast(ray, out hit)) {
 
-			if(figureischoise == false && xod == false) {
+		// 	if(figureischoise == false && xod == false) {
 					
 					
-            if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("white")){
-                    TextMeshProUGUI textmeshName = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
-	                textmeshName.text = GameObject.Find("Camera").GetComponent<Xod>().Igrok1Name;
-                 	hit.collider.gameObject.GetComponent<Outline>().enabled = true;
-					hit.collider.gameObject.GetComponent<EnterMouse>().entermouse = false;
-					figureischoise = true;
-					choisefigure = hit.collider.gameObject;
-					camera.GetComponent<Moves>().enabled = true;
-				    xod = true;
-					moves = true;
-            }
+        //     if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("white")){
+        //             TextMeshProUGUI textmeshName = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
+	    //             textmeshName.text = GameObject.Find("Camera").GetComponent<Xod>().Igrok1Name;
+        //          	hit.collider.gameObject.GetComponent<Outline>().enabled = true;
+		// 			hit.collider.gameObject.GetComponent<EnterMouse>().entermouse = false;
+		// 			figureischoise = true;
+		// 			choisefigure = hit.collider.gameObject;
+		// 			camera.GetComponent<Moves>().enabled = true;
+		// 		    xod = true;
+		// 			moves = true;
+        //     }
 
-            if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("black")){
+        //     if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("black")){
                     
-					TextMeshProUGUI textmeshName = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
-	                textmeshName.text = GameObject.Find("Camera").GetComponent<Xod>().Igrok2Name;
-                 	hit.collider.gameObject.GetComponent<Outline>().enabled = true;
-					hit.collider.gameObject.GetComponent<EnterMouse>().entermouse = false;
-					figureischoise = true;
-					choisefigure = hit.collider.gameObject;
-					camera.GetComponent<Moves>().enabled = true;
-				    xod = true;
-					moves = true;
-            }
-        }
+		// 			TextMeshProUGUI textmeshName = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
+	    //             textmeshName.text = GameObject.Find("Camera").GetComponent<Xod>().Igrok2Name;
+        //          	hit.collider.gameObject.GetComponent<Outline>().enabled = true;
+		// 			hit.collider.gameObject.GetComponent<EnterMouse>().entermouse = false;
+		// 			figureischoise = true;
+		// 			choisefigure = hit.collider.gameObject;
+		// 			camera.GetComponent<Moves>().enabled = true;
+		// 		    xod = true;
+		// 			moves = true;
+        //     }
+        // }
 				
-				if(figureischoise == true && xod == false) {
-					
+				// if(figureischoise == true && xod == true) {
+					Debug.Log("СЃРјРѕС‚СЂРёРј");
 					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("white")){
-					
+						Debug.Log("СЃРјРѕС‚СЂРёРј1");
 					TextMeshProUGUI textmeshName = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
 	                textmeshName.text = GameObject.Find("Camera").GetComponent<Xod>().Igrok1Name;
 	                
@@ -127,7 +127,7 @@ public class Figure: MonoBehaviour {
 			        }
 				}
 			}
-		}
+		// }
 		
 			
 		
