@@ -25,7 +25,7 @@ public class Moves: MonoBehaviour {
 				// Debug.Log(c);
 				int intleftbukva = b - 1;
 				int intrightbukva = b + 1;
-
+				
 				Debug.Log("////////////////////////////////////////////////");
 				String stringsecond = s.Substring(1, 1);
 				int intsecond = Int32.Parse(stringsecond);
@@ -85,7 +85,8 @@ public class Moves: MonoBehaviour {
 					}
 				}
 
- 
+                if(intleftbukva > 17){
+
                 if(GameObject.Find(finalchar1).GetComponent<Cell>().stoitfigura == true){ 
 					  Debug.Log("?????"); 
 					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == false && GameObject.Find(finalchar1).GetComponent<Cell>().figeureName.Contains("white")){
@@ -100,7 +101,9 @@ public class Moves: MonoBehaviour {
 					GameObject.Find(finalchar1).GetComponent<Outline>().color = 1;
 					}
 				}
+				}
 
+                if(intrightbukva < 25){
                 if(GameObject.Find(finalchar2).GetComponent<Cell>().stoitfigura == true){  
 					  Debug.Log("?????");   
 					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == false && GameObject.Find(finalchar2).GetComponent<Cell>().figeureName.Contains("white")){
@@ -114,6 +117,7 @@ public class Moves: MonoBehaviour {
 					GameObject.Find(finalchar2).GetComponent<Outline>().enabled = true;
 					GameObject.Find(finalchar2).GetComponent<Outline>().color = 1;
 					}
+				}
 				}
 
 
