@@ -19,6 +19,8 @@ public class HiddenGO: MonoBehaviour {
 	public GameObject blackqueen;
 	public GameObject whiteking;
 	public GameObject[,] hiddengo;
+	public List<GameObject> whitefigures;
+	public List<GameObject> blackfigures;
 	private float x;
 	private float y;
 	private float z;
@@ -150,47 +152,71 @@ public class HiddenGO: MonoBehaviour {
 		foreach(GameObject go in hiddengo) {
 			
 			if (go.name.Contains("2")) {
+
 				GameObject pawnblack = Instantiate(whitepawn, go.transform.position, Quaternion.identity, figures.transform);
+				whitefigures.Add(pawnblack);
 			}
 			
 			if (go.name.Contains("7")) {
+
 				GameObject pawnblack = Instantiate(blackpawn, go.transform.position, Quaternion.identity, figures.transform);
+				blackfigures.Add(pawnblack);
 			}
 			
 			if (go.name.Contains("A1") || go.name.Contains("H1")) {
+
 				GameObject rookwhite = Instantiate(whiterook, go.transform.position, Quaternion.identity, figures.transform);
+				whitefigures.Add(rookwhite);
 			}
 			
 			if (go.name.Contains("A8") || go.name.Contains("H8")) {
+
 				GameObject rookblack = Instantiate(blackrook, go.transform.position, Quaternion.identity, figures.transform);
+				blackfigures.Add(rookblack);
 			}
 			
 			if (go.name.Contains("B1") || go.name.Contains("G1")) {
+
 				GameObject horsewhite = Instantiate(whitehorse, go.transform.position, Quaternion.identity, figures.transform);
+				whitefigures.Add(horsewhite);
 				horsewhite.transform.Rotate(0, -90, 0);
 			}
 			
 			if (go.name.Contains("B8") || go.name.Contains("G8")) {
+
 				GameObject horseblack = Instantiate(blackhorse, go.transform.position, Quaternion.identity, figures.transform);
+				blackfigures.Add(horseblack);
 				horseblack.transform.Rotate(0, 90, 0);
 			}
 			if (go.name.Contains("C1") || go.name.Contains("F1")) {
+
 				GameObject bishopwhite = Instantiate(whitebishop, go.transform.position, Quaternion.identity, figures.transform);
+				whitefigures.Add(bishopwhite);
 			}
 			if (go.name.Contains("C8") || go.name.Contains("F8")) {
+
 				GameObject bishopblack = Instantiate(blackbishop, go.transform.position, Quaternion.identity, figures.transform);
+				blackfigures.Add(bishopblack);
 			}
 			if (go.name.Contains("D1")) {
+
 				GameObject queenwhite = Instantiate(whitequeen, go.transform.position, Quaternion.identity, figures.transform);
+				whitefigures.Add(queenwhite);
 			}
 			if (go.name.Contains("D8")) {
+
 				GameObject kingblack = Instantiate(blackking, go.transform.position, Quaternion.identity, figures.transform);
+				blackfigures.Add(kingblack);
 			}
 			if (go.name.Contains("E1")) {
+
 				GameObject kingwhite = Instantiate(whiteking, go.transform.position, Quaternion.identity, figures.transform);
+				whitefigures.Add(kingwhite);
 			}
 			if (go.name.Contains("E8")) {
+
 				GameObject queenblack = Instantiate(blackqueen, go.transform.position, Quaternion.identity, figures.transform);
+				blackfigures.Add(queenblack);
 			}
 		}
 	}

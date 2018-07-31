@@ -22,7 +22,13 @@ public class Figure: MonoBehaviour {
  	public bool fromenabled = false;     // для string начальной ячейки
 	public String inCell;                // в какую ячейку идет фигура
 	public bool inenabled = false;       // для string конечной ячейки
-	
+	public int intMassivWhite;
+	public int intMassivBlack;
+
+	void Start(){
+		intMassivWhite = -1;
+		intMassivBlack = -1;
+	}
 	void Update () {
 
 		// if(XodIgroka1 == false){
@@ -65,9 +71,29 @@ public class Figure: MonoBehaviour {
         // }
 				
 				// if(figureischoise == true && xod == true) {
-					Debug.Log("смотрим");
+					
+
+                    // if(choisefigure != null){
+
+					// if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("black")){
+
+					// xodfigure = hit.collider.gameObject;
+					// fromenabled = true;
+                    // xodincell = true;
+					// }
+
+					// if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("white")){
+
+					// xodfigure = hit.collider.gameObject;
+				    // fromenabled = true;
+                    // xodincell = true; 
+					// }
+
+					// }
+
 					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("white")){
-						Debug.Log("смотрим1");
+					
+
 					TextMeshProUGUI textmeshName = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
 	                textmeshName.text = GameObject.Find("Camera").GetComponent<Xod>().Igrok1Name;
 	                
@@ -115,6 +141,9 @@ public class Figure: MonoBehaviour {
 					moves = true;
 					xod = true;
             }
+
+
+
 		}
 
                 if(hit.collider.gameObject.GetComponent<Cell>() != null){
@@ -181,7 +210,45 @@ public class Figure: MonoBehaviour {
 					choisefigure.GetComponent<EnterMouse>().entermouse = true;
 					choisefigure = null;
 					xodfigure = null;
-		}
+
+					foreach(GameObject wob in GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures){
+						foreach(GameObject bob in GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures){
+                        if(wob.GetComponent<Trig>().triger.name == bob.GetComponent<Trig>().triger.name){
+
+							intMassivWhite = GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures.IndexOf(wob);
+						}
+						}
+					}
+
+					foreach(GameObject bob in GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures){
+						foreach(GameObject wob in GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures){
+                        if(bob.GetComponent<Trig>().triger.name == wob.GetComponent<Trig>().triger.name){
+
+							intMassivBlack = GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures.IndexOf(bob);
+						}
+						}
+					}
+
+					if(intMassivWhite != -1 || intMassivBlack != -1){
+						if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true){
+
+							 GameObject delwhite = GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures[intMassivWhite];
+							 GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures.RemoveAt(intMassivWhite);
+							 Destroy(delwhite);
+						}
+
+						if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true){
+							
+						     GameObject delblack = GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures[intMassivBlack];
+                             GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures.RemoveAt(intMassivBlack);
+							 Destroy(delblack);
+						}
+
+					intMassivWhite = -1;
+					intMassivBlack = -1;
+					}
+					}
+		
 	}
 }
 		}
