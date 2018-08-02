@@ -8,9 +8,9 @@ public class Moves: MonoBehaviour {
 
 	void Update() {
 
-		if (gameObject.GetComponent <Figure>().moves) {
+		if (gameObject.GetComponent<Figure>().moves) {
 			
-			if (gameObject.GetComponent <Figure>().choisefigure.name.Contains("pawn")) {
+			if (gameObject.GetComponent<Figure>().choisefigure != null && gameObject.GetComponent<Figure>().choisefigure.name.Contains("pawn")) {
 				
 				String s = gameObject.GetComponent<Figure>().choisefigure.GetComponent<Trig>().triger.name;
 				String first = s.Substring(0, 1);
@@ -32,7 +32,7 @@ public class Moves: MonoBehaviour {
 				int intsecond1 = 0;
 				int intsecond2 = 0;
 				
-				if (GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && gameObject.GetComponent <Figure>().choisefigure.name.Contains("white")) {
+				if (GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && gameObject.GetComponent<Figure>().choisefigure.name.Contains("white")) {
 					
 					intsecond1 = intsecond + 1;
 					Debug.Log(intsecond1);
@@ -41,7 +41,7 @@ public class Moves: MonoBehaviour {
 					
 				}
 				
-				if (GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && gameObject.GetComponent <Figure>().choisefigure.name.Contains("black")) {
+				if (GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && gameObject.GetComponent<Figure>().choisefigure.name.Contains("black")) {
 					
 					intsecond1 = intsecond - 1;
 					intsecond2 = intsecond - 2;
@@ -61,28 +61,48 @@ public class Moves: MonoBehaviour {
 
 				Debug.Log("////////////////////////////////////////////////");
 
-				if(GameObject.Find(final1).GetComponent<Cell>().stoitfigura == true){    
-					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == false && GameObject.Find(final1).GetComponent<Cell>().figeureName.Contains("white")){
+				if(GameObject.Find(final1).GetComponent<Cell>().stoitfigura == false){    
 
-					GameObject.Find(final1).GetComponent<Renderer>().material.color = Color.red;
-					}
+                GameObject.Find(final1).GetComponent<Outline>().enabled = true;
+				GameObject.Find(final1).GetComponent<Outline>().color = 1;
+				GameObject.Find(final1).GetComponent<Cell>().cell = false;
 
-					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == false && GameObject.Find(final1).GetComponent<Cell>().figeureName.Contains("black")){
+					// if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == false && GameObject.Find(final1).GetComponent<Cell>().figeureName.Contains("white")){
 
-					GameObject.Find(final1).GetComponent<Renderer>().material.color = Color.red;
-					}
+					// GameObject.Find(final1).GetComponent<Outline>().enabled = true;
+					// GameObject.Find(final1).GetComponent<Outline>().color = 1;
+					// }
+
+					// if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == false && GameObject.Find(final1).GetComponent<Cell>().figeureName.Contains("black")){
+
+					// GameObject.Find(final1).GetComponent<Outline>().enabled = true;
+					// GameObject.Find(final1).GetComponent<Outline>().color = 1;
+					// }
 				}
 
-				if(GameObject.Find(final2).GetComponent<Cell>().stoitfigura == true){
-					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == false && GameObject.Find(final1).GetComponent<Cell>().figeureName.Contains("white")){
+				if(GameObject.Find(final1).GetComponent<Cell>().stoitfigura == false && GameObject.Find(final2).GetComponent<Cell>().stoitfigura == false){
 
-					GameObject.Find(final1).GetComponent<Renderer>().material.color = Color.red;
-					}
+				GameObject.Find(final1).GetComponent<Outline>().enabled = true;
+				GameObject.Find(final1).GetComponent<Outline>().color = 1;
+				GameObject.Find(final1).GetComponent<Cell>().cell = false;
+				GameObject.Find(final1).GetComponent<Cell>().cellvibranadlaxoda = true;
 
-					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == false && GameObject.Find(final1).GetComponent<Cell>().figeureName.Contains("black")){
+				GameObject.Find(final2).GetComponent<Outline>().enabled = true;
+				GameObject.Find(final2).GetComponent<Outline>().color = 1;
+				GameObject.Find(final2).GetComponent<Cell>().cell = false;
+				GameObject.Find(final2).GetComponent<Cell>().cellvibranadlaxoda = true;
+					// if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == false && GameObject.Find(final1).GetComponent<Cell>().figeureName.Contains("white")){
 
-					GameObject.Find(final1).GetComponent<Renderer>().material.color = Color.red;
-					}
+					// GameObject.Find(final2).GetComponent<Outline>().enabled = true;
+					// GameObject.Find(final2).GetComponent<Outline>().color = 1;
+					// }
+
+					// if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == false && GameObject.Find(final1).GetComponent<Cell>().figeureName.Contains("black")){
+
+					// GameObject.Find(final2).GetComponent<Outline>().enabled = true;
+					// GameObject.Find(final2).GetComponent<Outline>().color = 1;
+					// }
+					
 				}
 
                 if(intleftbukva > 17){
@@ -92,13 +112,15 @@ public class Moves: MonoBehaviour {
 					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == false && GameObject.Find(finalchar1).GetComponent<Cell>().figeureName.Contains("white")){
 
 					GameObject.Find(finalchar1).GetComponent<Outline>().enabled = true;
-					GameObject.Find(finalchar1).GetComponent<Outline>().color = 1;
+					GameObject.Find(finalchar1).GetComponent<Outline>().color = 0;
+					GameObject.Find(finalchar1).GetComponent<Cell>().cellvibranadlaxoda = true;
 					}
 
 					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == false && GameObject.Find(finalchar1).GetComponent<Cell>().figeureName.Contains("black")){
 
 					GameObject.Find(finalchar1).GetComponent<Outline>().enabled = true;
-					GameObject.Find(finalchar1).GetComponent<Outline>().color = 1;
+					GameObject.Find(finalchar1).GetComponent<Outline>().color = 0;
+					GameObject.Find(finalchar1).GetComponent<Cell>().cellvibranadlaxoda = true;
 					}
 				}
 				}
@@ -109,13 +131,15 @@ public class Moves: MonoBehaviour {
 					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == false && GameObject.Find(finalchar2).GetComponent<Cell>().figeureName.Contains("white")){
 
 					GameObject.Find(finalchar2).GetComponent<Outline>().enabled = true;
-					GameObject.Find(finalchar2).GetComponent<Outline>().color = 1;
+					GameObject.Find(finalchar2).GetComponent<Outline>().color = 0;
+					GameObject.Find(finalchar2).GetComponent<Cell>().cellvibranadlaxoda = true;
 					}
 
 					if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == false && GameObject.Find(finalchar2).GetComponent<Cell>().figeureName.Contains("black")){
 
 					GameObject.Find(finalchar2).GetComponent<Outline>().enabled = true;
-					GameObject.Find(finalchar2).GetComponent<Outline>().color = 1;
+					GameObject.Find(finalchar2).GetComponent<Outline>().color = 0;
+					GameObject.Find(finalchar2).GetComponent<Cell>().cellvibranadlaxoda = true;
 					}
 				}
 				}
@@ -123,15 +147,19 @@ public class Moves: MonoBehaviour {
 
 				GameObject.Find(s).GetComponent<Outline>().enabled = true;
 				GameObject.Find(s).GetComponent<Cell>().cell = false;
-				GameObject.Find(final1).GetComponent<Outline>().enabled = true;
-				GameObject.Find(final1).GetComponent<Cell>().cell = false;
-				GameObject.Find(final1).GetComponent<Cell>().cellvibranadlaxoda = true;
-				GameObject.Find(final2).GetComponent<Outline>().enabled = true;
-				GameObject.Find(final2).GetComponent<Cell>().cell = false;
-				GameObject.Find(final2).GetComponent<Cell>().cellvibranadlaxoda = true;
+				GameObject.Find(s).GetComponent<Outline>().color = 1;
+				// GameObject.Find(final1).GetComponent<Outline>().enabled = true;
+				// GameObject.Find(final1).GetComponent<Outline>().color = 1;
+				// GameObject.Find(final1).GetComponent<Cell>().cell = false;
+				// GameObject.Find(final1).GetComponent<Cell>().cellvibranadlaxoda = true;
+				// GameObject.Find(final2).GetComponent<Outline>().enabled = true;
+				// GameObject.Find(final2).GetComponent<Outline>().color = 1;
+				// GameObject.Find(final2).GetComponent<Cell>().cell = false;
+				// GameObject.Find(final2).GetComponent<Cell>().cellvibranadlaxoda = true;
 
 
 				gameObject.GetComponent<Figure>().camera.GetComponent<Moves>().enabled = false;
+			    s = null;
 				gameObject.GetComponent<Figure>().moves = false;
 			}
 			

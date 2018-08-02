@@ -15,6 +15,8 @@ public class Figure: MonoBehaviour {
 	public Camera camera; 
 	private bool figureischoise = false; //проверка была ли ранее какая либо выбрана фигура или нет
 	public GameObject choisefigure; 
+
+
 	public GameObject xodfigure;         // в какую ячейку пойдет фигура
 	public bool XodIgroka1 = false;
 	public bool XodIgroka2 = false;
@@ -102,12 +104,6 @@ public class Figure: MonoBehaviour {
 					cell.GetComponent<Outline>().enabled = false;
 					}
 
-					if(choisefigure != null){
-						
-					choisefigure.GetComponent<Outline>().enabled = false;
-					choisefigure.GetComponent<EnterMouse>().entermouse = true;
-					}
-					
 					hit.collider.gameObject.GetComponent<Outline>().enabled = true;
 					hit.collider.gameObject.GetComponent<EnterMouse>().entermouse = false;
 					choisefigure = hit.collider.gameObject;
@@ -115,6 +111,8 @@ public class Figure: MonoBehaviour {
 					camera.GetComponent<Moves>().enabled = true;
 					moves = true;
 					xod = true;
+					figureischoise = true;
+					}
 				}
 
                 if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("black")){
@@ -126,12 +124,6 @@ public class Figure: MonoBehaviour {
 
 					cell.GetComponent<Outline>().enabled = false;
 					}
-
-					if(choisefigure != null){
-						
-					choisefigure.GetComponent<Outline>().enabled = false;
-					choisefigure.GetComponent<EnterMouse>().entermouse = true;
-					}
 					
 					hit.collider.gameObject.GetComponent<Outline>().enabled = true;
 					hit.collider.gameObject.GetComponent<EnterMouse>().entermouse = false;
@@ -140,11 +132,25 @@ public class Figure: MonoBehaviour {
 					camera.GetComponent<Moves>().enabled = true;
 					moves = true;
 					xod = true;
-            }
+					figureischoise = true;
+					}
+            
 
+			 if((GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("white")) || (GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("black"))) {
+             
+			           if(figureischoise == true && hit.collider.gameObject.GetComponent<Trig>().triger.GetComponent<Outline>().enabled){
+							Debug.Log("uuuu");
+							xodfigure = hit.collider.gameObject.GetComponent<Trig>().triger;
+					        fromenabled = true;
+                            xodincell = true;      
+						// }
+						
+					// choisefigure.GetComponent<Outline>().enabled = false;
+					// choisefigure.GetComponent<EnterMouse>().entermouse = true;
+					}
+			}
 
-
-		}
+			
 
                 if(hit.collider.gameObject.GetComponent<Cell>() != null){
 					
@@ -210,21 +216,26 @@ public class Figure: MonoBehaviour {
 					choisefigure.GetComponent<EnterMouse>().entermouse = true;
 					choisefigure = null;
 					xodfigure = null;
+					figureischoise = false;
+		}
+		}
 
 					foreach(GameObject wob in GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures){
 						foreach(GameObject bob in GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures){
-                        if(wob.GetComponent<Trig>().triger.name == bob.GetComponent<Trig>().triger.name){
+                        if(wob.transform.position == bob.transform.position){
 
 							intMassivWhite = GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures.IndexOf(wob);
+							Debug.Log("intMassivWhite =" + intMassivWhite);
 						}
 						}
 					}
 
 					foreach(GameObject bob in GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures){
 						foreach(GameObject wob in GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures){
-                        if(bob.GetComponent<Trig>().triger.name == wob.GetComponent<Trig>().triger.name){
+                        if(bob.transform.position == wob.transform.position){
 
 							intMassivBlack = GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures.IndexOf(bob);
+							Debug.Log("intMassivBlack =" + intMassivBlack);
 						}
 						}
 					}
@@ -234,14 +245,14 @@ public class Figure: MonoBehaviour {
 
 							 GameObject delwhite = GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures[intMassivWhite];
 							 GameObject.Find("Camera").GetComponent<HiddenGO>().whitefigures.RemoveAt(intMassivWhite);
-							 Destroy(delwhite);
+							 Destroy(delwhite.gameObject);
 						}
 
 						if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true){
 							
 						     GameObject delblack = GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures[intMassivBlack];
                              GameObject.Find("Camera").GetComponent<HiddenGO>().blackfigures.RemoveAt(intMassivBlack);
-							 Destroy(delblack);
+							 Destroy(delblack.gameObject);
 						}
 
 					intMassivWhite = -1;
@@ -250,8 +261,7 @@ public class Figure: MonoBehaviour {
 					}
 		
 	}
-}
-		}
+
 
 	
 
