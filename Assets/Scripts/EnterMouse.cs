@@ -33,8 +33,18 @@ public class EnterMouse : MonoBehaviour {
                  gameObject.GetComponent<Outline>().enabled = true;
             }
         }
-		
-        else if (gameObject.GetComponent<Cell>().stoitfigura == true){
+
+        else if (gameObject.GetComponent<Cell>().cellvibranadlaxoda == true){
+
+        gameObject.GetComponent<Outline>().enabled = true;
+        }
+
+		else if (gameObject.GetComponent<Cell>().stoitfigura == false){
+
+        gameObject.GetComponent<Outline>().enabled = false;
+        }
+
+        else if (gameObject.GetComponent<Cell>().stoitfigura == false){
 
         gameObject.GetComponent<Outline>().enabled = false;
         }

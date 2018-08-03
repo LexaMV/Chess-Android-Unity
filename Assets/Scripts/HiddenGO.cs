@@ -153,8 +153,8 @@ public class HiddenGO: MonoBehaviour {
 			
 			if (go.name.Contains("2")) {
 
-				GameObject pawnblack = Instantiate(whitepawn, go.transform.position, Quaternion.identity, figures.transform);
-				whitefigures.Add(pawnblack);
+				GameObject pawnwhite = Instantiate(whitepawn, go.transform.position, Quaternion.identity, figures.transform);
+				whitefigures.Add(pawnwhite);
 			}
 			
 			if (go.name.Contains("7")) {
