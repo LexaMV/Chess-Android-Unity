@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trig : MonoBehaviour {
+public class Trig : Photon.MonoBehaviour {
 
     public GameObject triger;
 
@@ -31,15 +31,50 @@ public class Trig : MonoBehaviour {
         //     }
         // }
 
+        // if(PhotonNetwork.isMasterClient){
         triger = other.gameObject; // ячейка
         triger.GetComponent<Cell> ().stoitfigura = true;
         triger.GetComponent<Cell> ().figeureName = gameObject.name;
-        Debug.Log (other.gameObject.name);
+        // Debug.LogError (other.gameObject.name);
+        // }
+
+        // else if(!PhotonNetwork.isMasterClient){
+        //     int a = other.gameObject.GetComponent<PhotonView>().ownerId;
+        //     triger = PhotonView.Find(a).gameObject;
+        //     triger.GetComponent<Cell> ().stoitfigura = true;
+        //     triger.GetComponent<Cell> ().figeureName = gameObject.name;
+        //     Debug.Log (other.gameObject.name);
+        // }
+    
+
     }
 
     void OnTriggerExit (Collider other) {
-
+        // if(PhotonNetwork.isMasterClient){
         other.gameObject.GetComponent<Cell> ().stoitfigura = false;
         other.gameObject.GetComponent<Cell> ().figeureName = null;
-    }
+    // }
+
+    // else if(!PhotonNetwork.isMasterClient){
+    //   int a = other.gameObject.GetComponent<PhotonView>().ownerId;
+    //   triger.GetComponent<Cell> ().stoitfigura = false;
+    //         triger.GetComponent<Cell> ().figeureName = null;
+    // }
+}
+
+
+	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+        string s = triger.name;
+        // Debug.Log("/////////////////////////////////////////////");
+        // Debug.LogError(triger.name);
+		stream.Serialize(ref s);
+		
+
+
+		if(stream.isReading){
+			string b = s;
+            triger = GameObject.Find("b").gameObject;
+          
+		}
+	}
 }

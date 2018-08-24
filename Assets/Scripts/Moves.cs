@@ -10,6 +10,7 @@ public class Moves : MonoBehaviour {
 
 		if (gameObject.GetComponent<Figure> ().moves) {
 
+# region Pawn
 			if (gameObject.GetComponent<Figure> ().choisefigure != null && gameObject.GetComponent<Figure> ().choisefigure.name.Contains ("pawn")) {
 
 				String s = gameObject.GetComponent<Figure> ().choisefigure.GetComponent<Trig> ().triger.name;
@@ -113,7 +114,10 @@ public class Moves : MonoBehaviour {
 				s = null;
 				gameObject.GetComponent<Figure> ().moves = false;
 			}
-			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#endregion
+
+#region Rook
 			if (gameObject.GetComponent<Figure> ().choisefigure.name.Contains ("rook")) {
 
 				String s = gameObject.GetComponent<Figure> ().choisefigure.GetComponent<Trig> ().triger.name;
@@ -207,7 +211,10 @@ public class Moves : MonoBehaviour {
 				gameObject.GetComponent<Figure> ().camera.GetComponent<Moves> ().enabled = false;
 				gameObject.GetComponent<Figure> ().moves = false;
 			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#endregion
+		
+		#region  Knight
 			if (gameObject.GetComponent<Figure> ().choisefigure.name.Contains ("knight")) {
 
 				String s = gameObject.GetComponent<Figure> ().choisefigure.GetComponent<Trig> ().triger.name;
@@ -320,7 +327,10 @@ public class Moves : MonoBehaviour {
 				gameObject.GetComponent<Figure> ().camera.GetComponent<Moves> ().enabled = false;
 				gameObject.GetComponent<Figure> ().moves = false;
 			}
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+
+			#endregion
+
+			#region Bishop			
 			if (gameObject.GetComponent<Figure> ().choisefigure.name.Contains ("bishop")) {
 
 				String s = gameObject.GetComponent<Figure> ().choisefigure.GetComponent<Trig> ().triger.name;
@@ -408,7 +418,9 @@ public class Moves : MonoBehaviour {
 				gameObject.GetComponent<Figure> ().moves = false;
 			}
 
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+			#endregion
+
+			#region  Queen		
 			if (gameObject.GetComponent<Figure> ().choisefigure.name.Contains ("queen")) {
 
 				String s = gameObject.GetComponent<Figure> ().choisefigure.GetComponent<Trig> ().triger.name;
@@ -580,14 +592,17 @@ public class Moves : MonoBehaviour {
 				gameObject.GetComponent<Figure> ().moves = false;
 			}
 
-			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+			#endregion
+
+			#region King		
 			if (gameObject.GetComponent<Figure> ().choisefigure.name.Contains ("king")) {
 
 				String s = gameObject.GetComponent<Figure> ().choisefigure.GetComponent<Trig> ().triger.name;
 				String first = s.Substring (0, 1);
 				String stringsecond = s.Substring (1, 1);
 				int intsecond = Int32.Parse (stringsecond);
-				int b = Array.IndexOf (gameObject.GetComponent<HiddenGO> ().letters, first);
+				int b = (int) (Convert.ToChar (first) - '0');
+				// int b = Array.IndexOf (gameObject.GetComponent<HiddenGO> ().letters, first);
 				ArrayList cell = new ArrayList ();
 				int upint = intsecond + 1;
 				int downint = intsecond - 1;
@@ -610,63 +625,74 @@ public class Moves : MonoBehaviour {
 				PereborMassiva (cell);
 				cell.Clear ();
 
-				if (b - 1 >= 0) {
+				int p = b + 1;
+				Debug.Log ("*********************************" + p);
+				int n = b - 1;
+				Debug.Log ("*********************************" + n);
 
-					String upStringLeft = gameObject.GetComponent<HiddenGO> ().letters[b - 1];
+				if (p > 17 && p < 24) {
+					char u = (char) (p + '0');
+					String e = u.ToString ();
+					String l = e + intsecond;
+					Debug.Log ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + l);
+					cell.Add (l);
+
+					PereborMassiva (cell);
+					cell.Clear ();
 
 					if (intsecond + 1 <= 8) {
 
-						String finalUpStringLeft = upStringLeft + upint.ToString ();
-						String finalLeft = upStringLeft + intsecond.ToString ();
-						cell.Add (finalUpStringLeft);
-						cell.Add (finalLeft);
+						String finalUp = e + upint.ToString ();
+						cell.Add (finalUp);
+						PereborMassiva (cell);
+						cell.Clear ();
 					}
 
 					if (intsecond - 1 >= 1) {
 
-						String finalDownStringLeft = upStringLeft + downint.ToString ();
-						cell.Add (finalDownStringLeft);
+						String finalDown = e + downint.ToString ();
+						cell.Add (finalDown);
+						PereborMassiva (cell);
+						cell.Clear ();
 					}
+
 				}
 
 				PereborMassiva (cell);
 				cell.Clear ();
 
-				if (b + 1 <= 7) {
-
-					String upStringRight = gameObject.GetComponent<HiddenGO> ().letters[b + 1];
-
+				if (n > 17 && n < 24) {
+					char y = (char) (n + '0');
+					String o = y.ToString ();
+					String f = o + intsecond;
+					Debug.Log ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + f);
+					cell.Add (f);
+					PereborMassiva (cell);
+					cell.Clear ();
 					if (intsecond + 1 <= 8) {
 
-						String finalUpStringRight = upStringRight + upint.ToString ();
-						String finalRight = upStringRight + intsecond.ToString ();
-						cell.Add (finalRight);
-						cell.Add (finalUpStringRight);
+						String finalUp = o + upint.ToString ();
+						cell.Add (finalUp);
+						PereborMassiva (cell);
+						cell.Clear ();
 					}
 
 					if (intsecond - 1 >= 1) {
 
-						String finalDownStringRight = upStringRight + downint.ToString ();
-						cell.Add (finalDownStringRight);
+						String finalDown = o + downint.ToString ();
+						cell.Add (finalDown);
+						PereborMassiva (cell);
+						cell.Clear ();
 					}
 				}
 
 				PereborMassiva (cell);
 				cell.Clear ();
-
-				// foreach(String prefecs in cell) {
-
-				// 	if (prefecs != null) {
-
-				// 		GameObject.Find(prefecs).GetComponent<Outline>().enabled = true;
-				// 		GameObject.Find(prefecs).GetComponent<Cell>().cellvibranadlaxoda = true;
-				// 		GameObject.Find(prefecs).GetComponent<Cell>().cell = false;
-				// 	}
-				// }
 
 				gameObject.GetComponent<Figure> ().camera.GetComponent<Moves> ().enabled = false;
 				gameObject.GetComponent<Figure> ().moves = false;
 			}
+			#endregion
 		}
 	}
 

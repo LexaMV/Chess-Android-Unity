@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using cakeslice;
 using UnityEngine;
 
-public class EnterMouse : MonoBehaviour {
+public class EnterMouse : Photon.MonoBehaviour {
     public bool entermouse = true;
-
     void OnMouseEnter () {
-        if (gameObject.transform.parent.name == "Figures") {
+     
+        if (gameObject.name.Contains ("white") || gameObject.name.Contains ("black")) {
 
             if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == false && gameObject.name.Contains ("white")) {
 
@@ -42,8 +42,10 @@ public class EnterMouse : MonoBehaviour {
             gameObject.GetComponent<Outline> ().enabled = true;
         }
     }
+    
 
     void OnMouseExit () {
+       
         if (gameObject.GetComponent<Cell> () == null) {
 
             gameObject.GetComponent<Outline> ().enabled = false;
@@ -55,4 +57,4 @@ public class EnterMouse : MonoBehaviour {
             gameObject.GetComponent<Outline> ().enabled = false;
         }
     }
-}
+    }
