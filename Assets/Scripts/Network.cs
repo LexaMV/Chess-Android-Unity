@@ -57,7 +57,7 @@ public class Network : PunBehaviour, IPunTurnManagerCallbacks {
         this.turnManager.TurnManagerListener = this; // добавили слушетеля
         this.turnManager.TurnDuration = 5f; // время ожидания между очередями
         PhotonNetwork.ConnectUsingSettings(gameVersion); //подключаемся
-        // PhotonHandler.StopFallbackSendAckThread(); // заморозил соединение
+        PhotonHandler.StopFallbackSendAckThread(); // заморозил соединение
 	}
 
  public virtual void OnConnectedToMaster()
@@ -69,6 +69,7 @@ public class Network : PunBehaviour, IPunTurnManagerCallbacks {
     {
         
         PhotonNetwork.JoinOrCreateRoom("test", new RoomOptions(), TypedLobby.Default);
+         PhotonHandler.StopFallbackSendAckThread();
     }
 
  public void OnJoinedRoom()
