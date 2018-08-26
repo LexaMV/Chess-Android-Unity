@@ -40,12 +40,15 @@ public class HiddenGO : Photon.MonoBehaviour {
 	public GameObject HalfCell;
 	public GameObject FourthCell;
 
+	public int tag;
+
     static public HiddenGO Instance;
 	public int ahidden;
 	public int hidengoIDviewID;
 	public int whitefiguresIDviewID;
 	public int blackfiguresIDviewID;
 	void Start () {
+		tag = 0;
 	
 		Instance = this;
 		// этот код для расстановки ячеек ввиде квадрата
@@ -81,9 +84,11 @@ public class HiddenGO : Photon.MonoBehaviour {
 				if (black == false) {
 					// GameObject cell = PhotonNetwork.Instantiate (PrefabCell1.name, new Vector3 (x, y, z), Quaternion.identity, 0);
 					GameObject cell = GameObject.Instantiate (PrefabCell1, new Vector3 (x, y, z), Quaternion.identity);
-					cell.transform.SetParent(field.transform);
+					// cell.transform.SetParent(field.transform);
 					cell.name = letters[7 - j] + digit[digitint];
 					black = true;
+					
+					cell.tag = cell.name;
 					// hidengoIDviewID = hidengoIDviewID + 1;
 					// cell.GetComponent<PhotonView>().viewID = hidengoIDviewID;
 					// PhotonNetwork.RaiseEvent(hidengoIDviewID);
@@ -93,7 +98,9 @@ public class HiddenGO : Photon.MonoBehaviour {
 					// GameObject cell = PhotonNetwork.Instantiate (PrefabCell2.name, new Vector3 (x, y, z), Quaternion.identity, 0);
 					GameObject cell = GameObject.Instantiate (PrefabCell2, new Vector3 (x, y, z), Quaternion.identity);
 					cell.name = letters[7 - j] + digit[digitint];
-					cell.transform.SetParent(field.transform);
+					tag = tag + 1;
+						cell.tag = cell.name;
+					// cell.transform.SetParent(field.transform);
 					// hidengoIDviewID = hidengoIDviewID + 1;
 					// cell.GetComponent<PhotonView>().viewID = hidengoIDviewID;
 					// PhotonNetwork.AllocateViewID();
@@ -118,7 +125,7 @@ public class HiddenGO : Photon.MonoBehaviour {
 		for (int i = 0; i < 8; i++) {
 			// GameObject half = PhotonNetwork.Instantiate (HalfCell.name, new Vector3 (x, y, z), Quaternion.identity,0);
 			GameObject half = GameObject.Instantiate (HalfCell, new Vector3 (x, y, z), Quaternion.identity);
-			half.transform.SetParent(field.transform);
+			// half.transform.SetParent(field.transform);
 			half.GetComponent<Renderer> ().material.color = Color.black;
 			RectTransform rectTextMesh = half.transform.Find ("Canvas").gameObject.transform.Find ("TextMesh").GetComponent<RectTransform> ();
 			rectTextMesh.Rotate (new Vector3 (0, 0, 90));
@@ -134,7 +141,7 @@ public class HiddenGO : Photon.MonoBehaviour {
 		for (int i = 0; i < 8; i++) {
 			// GameObject half = PhotonNetwork.Instantiate (HalfCell.name, new Vector3 (x, y, z), Quaternion.identity,0);
 			GameObject half = GameObject.Instantiate (HalfCell, new Vector3 (x, y, z), Quaternion.identity);
-			half.transform.SetParent(field.transform);
+			// half.transform.SetParent(field.transform);
 			half.GetComponent<Renderer> ().material.color = Color.black;
 			RectTransform rectTextMesh = half.transform.Find ("Canvas").gameObject.transform.Find ("TextMesh").GetComponent<RectTransform> ();
 			rectTextMesh.Rotate (new Vector3 (0, 0, -90));
@@ -150,7 +157,7 @@ public class HiddenGO : Photon.MonoBehaviour {
 		for (int i = 0; i < 8; i++) {
 			// GameObject half = PhotonNetwork.Instantiate (HalfCell.name, new Vector3 (x, y, z), Quaternion.identity,0);
 			GameObject half = GameObject.Instantiate (HalfCell, new Vector3 (x, y, z), Quaternion.identity);
-			half.transform.SetParent(field.transform);
+			// half.transform.SetParent(field.transform);
 			half.GetComponent<Renderer> ().material.color = Color.black;
 			RectTransform rectTextMesh = half.transform.Find ("Canvas").gameObject.transform.Find ("TextMesh").GetComponent<RectTransform> ();
 			rectTextMesh.Rotate (new Vector3 (0, 0, 0));
@@ -167,7 +174,7 @@ public class HiddenGO : Photon.MonoBehaviour {
 		for (int i = 0; i < 8; i++) {
 			// GameObject half = PhotonNetwork.Instantiate (HalfCell.name, new Vector3 (x, y, z), Quaternion.identity,0);
 			GameObject half = GameObject.Instantiate (HalfCell, new Vector3 (x, y, z), Quaternion.identity);
-			half.transform.SetParent(field.transform);
+			// half.transform.SetParent(field.transform);
 			half.GetComponent<Renderer> ().material.color = Color.black;
 			RectTransform rectTextMesh = half.transform.Find ("Canvas").gameObject.transform.Find ("TextMesh").GetComponent<RectTransform> ();
 			rectTextMesh.Rotate (new Vector3 (0, 0, 180));
@@ -179,19 +186,19 @@ public class HiddenGO : Photon.MonoBehaviour {
 
 		// GameObject fourth1 = PhotonNetwork.Instantiate (FourthCell.name, new Vector3 (-9.375f, 1.0f, -9.375f), Quaternion.identity,0);
 		GameObject fourth1 = GameObject.Instantiate (FourthCell, new Vector3 (-9.375f, 1.0f, -9.375f), Quaternion.identity);
-		fourth1.transform.SetParent(field.transform);
+		// fourth1.transform.SetParent(field.transform);
 		fourth1.GetComponent<Renderer> ().material.color = Color.black;
 		// GameObject fourth2 = PhotonNetwork.Instantiate (FourthCell.name, new Vector3 (-9.375f, 1.0f, 11.875f), Quaternion.identity, 0);
 		GameObject fourth2 = GameObject.Instantiate (FourthCell, new Vector3 (-9.375f, 1.0f, 11.875f), Quaternion.identity);
-		fourth2.transform.SetParent(field.transform);
+		// fourth2.transform.SetParent(field.transform);
 		fourth2.GetComponent<Renderer> ().material.color = Color.black;
 		// GameObject fourth3 = PhotonNetwork.Instantiate (FourthCell.name, new Vector3 (11.875f, 1.0f, 11.875f), Quaternion.identity, 0);
 		GameObject fourth3 = GameObject.Instantiate (FourthCell, new Vector3 (11.875f, 1.0f, 11.875f), Quaternion.identity);
-		fourth3.transform.SetParent(field.transform);
+		// fourth3.transform.SetParent(field.transform);
 		fourth3.GetComponent<Renderer> ().material.color = Color.black;
 		// GameObject fourth4 = PhotonNetwork.Instantiate (FourthCell.name, new Vector3 (11.875f, 1.0f, -9.375f), Quaternion.identity, 0);
 		GameObject fourth4 = GameObject.Instantiate (FourthCell, new Vector3 (11.875f, 1.0f, -9.375f), Quaternion.identity);
-		fourth4.transform.SetParent(field.transform);
+		// fourth4.transform.SetParent(field.transform);
 		fourth4.GetComponent<Renderer> ().material.color = Color.black;
 
 		// расстановка фигур на поле боя
@@ -203,9 +210,11 @@ public class HiddenGO : Photon.MonoBehaviour {
 				// GameObject pawnwhite = Instantiate (whitepawn, go.transform.position, Quaternion.identity, figures.transform);
 				// GameObject pawnwhite = PhotonNetwork.Instantiate(whitepawn.name, go.transform.position, Quaternion.identity, 0);
 				GameObject pawnwhite = GameObject.Instantiate(whitepawn, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				pawnwhite.name = "pawnwhite" + tag.ToString();
 				// whitefiguresIDviewID = whitefiguresIDviewID +1; 
 				// pawnwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
-				pawnwhite.transform.SetParent(figures.transform);
+				// pawnwhite.transform.SetParent(figures.transform);
 				whitefigures.Add (pawnwhite);
 			}
 
@@ -213,9 +222,11 @@ public class HiddenGO : Photon.MonoBehaviour {
 
 				// GameObject pawnblack = PhotonNetwork.Instantiate (blackpawn.name, go.transform.position, Quaternion.identity, 0);
 				GameObject pawnblack = GameObject.Instantiate (blackpawn, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				pawnblack.name = "pawnblack" + tag.ToString();
 				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
 				// pawnblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
-				pawnblack.transform.SetParent(figures.transform);
+				// pawnblack.transform.SetParent(figures.transform);
 				blackfigures.Add (pawnblack);
 			}
 
@@ -223,9 +234,11 @@ public class HiddenGO : Photon.MonoBehaviour {
 
 				// GameObject rookwhite = PhotonNetwork.Instantiate (whiterook.name, go.transform.position, Quaternion.identity, 0);
 				GameObject rookwhite = GameObject.Instantiate (whiterook, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				rookwhite.name = "rookwhite" + tag.ToString();
 				// whitefiguresIDviewID = whitefiguresIDviewID +1; 
 				// rookwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
-				rookwhite.transform.SetParent(figures.transform);
+				// rookwhite.transform.SetParent(figures.transform);
 				whitefigures.Add (rookwhite);
 			}
 
@@ -233,9 +246,11 @@ public class HiddenGO : Photon.MonoBehaviour {
  
 				// GameObject rookblack = PhotonNetwork.Instantiate (blackrook.name, go.transform.position, Quaternion.identity, 0);
 				GameObject rookblack = GameObject.Instantiate (blackrook, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				rookblack.name = "rookblack" + tag.ToString();
 				// blackfiguresIDviewID = blackfiguresIDviewID +1;  
 				// rookblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
-				rookblack.transform.SetParent(figures.transform);
+				// rookblack.transform.SetParent(figures.transform);
 				blackfigures.Add (rookblack);
 			}
 
@@ -243,9 +258,11 @@ public class HiddenGO : Photon.MonoBehaviour {
 
 				// GameObject horsewhite = PhotonNetwork.Instantiate (whitehorse.name, go.transform.position, Quaternion.identity, 0);
 				GameObject horsewhite = GameObject.Instantiate (whitehorse, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				horsewhite.name = "horsewhite" + tag.ToString();
 				// whitefiguresIDviewID = whitefiguresIDviewID +1; 
 				// horsewhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
-				horsewhite.transform.SetParent(figures.transform);
+				// horsewhite.transform.SetParent(figures.transform);
 				whitefigures.Add (horsewhite);
 				horsewhite.transform.Rotate (0, -90, 0);
 			}
@@ -254,9 +271,11 @@ public class HiddenGO : Photon.MonoBehaviour {
 
 				// GameObject horseblack = PhotonNetwork.Instantiate (blackhorse.name, go.transform.position, Quaternion.identity, 0);
 			    GameObject horseblack = GameObject.Instantiate (blackhorse, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				horseblack.name = "horseblack" + tag.ToString();
 				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
 				// horseblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
-				horseblack.transform.SetParent(figures.transform);
+				// horseblack.transform.SetParent(figures.transform);
 				blackfigures.Add (horseblack);
 				horseblack.transform.Rotate (0, 90, 0);
 			}
@@ -264,33 +283,40 @@ public class HiddenGO : Photon.MonoBehaviour {
 
 				// GameObject bishopwhite = PhotonNetwork.Instantiate (whitebishop.name, go.transform.position, Quaternion.identity, 0);
 				GameObject bishopwhite = GameObject.Instantiate (whitebishop, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				bishopwhite.name = "bishopwhite" + tag.ToString();
 				// whitefiguresIDviewID = whitefiguresIDviewID +1; 
 				// bishopwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
-				bishopwhite.transform.SetParent(figures.transform);
+				// bishopwhite.transform.SetParent(figures.transform);
 				whitefigures.Add (bishopwhite);
 			}
 			if (go.name.Contains ("C8") || go.name.Contains ("F8")) {
 
 				// GameObject bishopblack = PhotonNetwork.Instantiate (blackbishop.name, go.transform.position, Quaternion.identity, 0);
 				GameObject bishopblack = GameObject.Instantiate (blackbishop, go.transform.position, Quaternion.identity);
+			
+				tag = tag + 1;
+				bishopblack.name = "bishopblack" + tag.ToString();
 				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
 				// bishopblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
-				bishopblack.transform.SetParent(figures.transform);
+				// bishopblack.transform.SetParent(figures.transform);
 				blackfigures.Add (bishopblack);
 			}
 			if (go.name.Contains ("D1")) {
 
 				// GameObject queenwhite = PhotonNetwork.Instantiate (whitequeen.name, go.transform.position, Quaternion.identity, 0);
 				GameObject queenwhite = GameObject.Instantiate (whitequeen, go.transform.position, Quaternion.identity);
+				queenwhite.name = "queenwhite";
 				// whitefiguresIDviewID = whitefiguresIDviewID +1;  
 				// queenwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
-				queenwhite.transform.SetParent(figures.transform);
+				// queenwhite.transform.SetParent(figures.transform);
 				whitefigures.Add (queenwhite);
 			}
 			if (go.name.Contains ("D8")) {
 
 				// GameObject kingblack =PhotonNetwork.Instantiate (blackking.name, go.transform.position, Quaternion.identity, 0);
 				GameObject kingblack = GameObject.Instantiate (blackking, go.transform.position, Quaternion.identity);
+				kingblack.name = "kingblack";
 				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
 				// kingblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
 				// kingblack.transform.SetParent(figures.transform);
@@ -300,18 +326,20 @@ public class HiddenGO : Photon.MonoBehaviour {
 
 				// GameObject kingwhite = PhotonNetwork.Instantiate (whiteking.name, go.transform.position, Quaternion.identity, 0);
 				GameObject kingwhite = GameObject.Instantiate (whiteking, go.transform.position, Quaternion.identity);
+				kingwhite.name = "kingwhite";
 			    // whitefiguresIDviewID = whitefiguresIDviewID +1;  
 				// kingwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
-				kingwhite.transform.SetParent(figures.transform);
+				// kingwhite.transform.SetParent(figures.transform);
 				whitefigures.Add (kingwhite);
 			}
 			if (go.name.Contains ("E8")) {
 
 				// GameObject queenblack = PhotonNetwork.Instantiate (blackqueen.name, go.transform.position, Quaternion.identity,0);
 				GameObject queenblack = GameObject.Instantiate (blackqueen, go.transform.position, Quaternion.identity);
+				queenblack.name = "queenblack";
 				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
 				// queenblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
-				queenblack.transform.SetParent(figures.transform);
+				// queenblack.transform.SetParent(figures.transform);
 				blackfigures.Add (queenblack);
 			}
   		}

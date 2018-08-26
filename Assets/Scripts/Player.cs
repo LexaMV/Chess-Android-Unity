@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Player : Photon.MonoBehaviour {
 
+      public Vector3 pos;
+	  public Quaternion rot;
+
+	  void Start(){
+		  pos = transform.position;
+		  rot = transform.rotation;
+	  }
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
-		Vector3 pos = transform.position;
-		Quaternion rot = transform.rotation;
+		pos = transform.position;
+		rot = transform.rotation;
 		stream.Serialize(ref pos);
 		stream.Serialize(ref rot);
 

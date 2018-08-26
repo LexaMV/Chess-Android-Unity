@@ -99,14 +99,14 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 
     public void Start()
     {
-		this.turnManager = this.gameObject.AddComponent<PunTurnManager>();
-        this.turnManager.TurnManagerListener = this;
-        this.turnManager.TurnDuration = 5f;
+		this.turnManager = this.gameObject.AddComponent<PunTurnManager>(); // добавили компанент
+        this.turnManager.TurnManagerListener = this; // добавили слушетеля
+        this.turnManager.TurnDuration = 5f; //аремя поворота?
         
 
-        this.localSelectionImage.gameObject.SetActive(false);
-        this.remoteSelectionImage.gameObject.SetActive(false);
-        this.StartCoroutine("CycleRemoteHandCoroutine");
+        this.localSelectionImage.gameObject.SetActive(false); //картинка
+        this.remoteSelectionImage.gameObject.SetActive(false); //картинка
+        this.StartCoroutine("CycleRemoteHandCoroutine"); // пошла коратина, возращает от 1 до 4
 
 		RefreshUIViews();
     }
@@ -126,8 +126,8 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
         }
         if (Input.GetKeyUp(KeyCode.C))
         {
-            PhotonNetwork.ConnectUsingSettings(null);
-            PhotonHandler.StopFallbackSendAckThread();
+            PhotonNetwork.ConnectUsingSettings(null); //подключаемся
+            PhotonHandler.StopFallbackSendAckThread(); // заморозил соединение
         }
 
 	
@@ -139,7 +139,7 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 		// disable the "reconnect panel" if PUN is connected or connecting
 		if (PhotonNetwork.connected && this.DisconnectedPanel.gameObject.GetActive())
 		{
-			this.DisconnectedPanel.gameObject.SetActive(false);
+			this.DisconnectedPanel.gameObject.SetActive(false); // завершен поворот?
 		}
 		if (!PhotonNetwork.connected && !PhotonNetwork.connecting && !this.DisconnectedPanel.gameObject.GetActive())
 		{
@@ -234,7 +234,7 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
     #region TurnManager Callbacks
 
     /// <summary>Called when a turn begins (Master Client set a new Turn number).</summary>
-    public void OnTurnBegins(int turn)
+    public void OnTurnBegins(int turn)     // Мероприятие начинается
     {
         Debug.Log("OnTurnBegins() turn: "+ turn);
         this.localSelection = Hand.None;
@@ -250,7 +250,7 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
     }
 
 
-    public void OnTurnCompleted(int obj)
+    public void OnTurnCompleted(int obj)   // Вызывается когда очередь завершена (завершается у всех игроков)
     {
         Debug.Log("OnTurnCompleted: " + obj);
 
@@ -261,7 +261,7 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 
 
     // when a player moved (but did not finish the turn)
-    public void OnPlayerMove(PhotonPlayer photonPlayer, int turn, object move)
+    public void OnPlayerMove(PhotonPlayer photonPlayer, int turn, object move)  //когда игрок ходит но не заершает очередь
     {
         Debug.Log("OnPlayerMove: " + photonPlayer + " turn: " + turn + " action: " + move);
         throw new NotImplementedException();
@@ -269,7 +269,7 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 
 
     // when a player made the last/final move in a turn
-    public void OnPlayerFinished(PhotonPlayer photonPlayer, int turn, object move)
+    public void OnPlayerFinished(PhotonPlayer photonPlayer, int turn, object move) // когда игрок делает послдений шаг в очереди
     {
         Debug.Log("OnTurnFinished: " + photonPlayer + " turn: " + turn + " action: " + move);
 
@@ -285,8 +285,7 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 
 
 
-    public void OnTurnTimeEnds(int obj)
-    {
+    public void OnTurnTimeEnds(int obj){  //Вызывается, когда завершается очередь из-за ограничения по времени (таймаут для очереди)
 		if (!IsShowingResults)
 		{
 			Debug.Log("OnTurnTimeEnds: Calling OnTurnCompleted");
@@ -308,7 +307,7 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 
     
     /// <summary>Call to start the turn (only the Master Client will send this).</summary>
-    public void StartTurn()
+    public void StartTurn() //Вызов старта очереди(только на мастер клиенте может быть запущено)
     {
         if (PhotonNetwork.isMasterClient)
         {
@@ -475,12 +474,12 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 
 	void RefreshUIViews()
 	{
-		TimerFillImage.anchorMax = new Vector2(0f,1f);
+		TimerFillImage.anchorMax = new Vector2(0f,1f); //картинка
 
-		ConnectUiView.gameObject.SetActive(!PhotonNetwork.inRoom);
-		GameUiView.gameObject.SetActive(PhotonNetwork.inRoom);
+		ConnectUiView.gameObject.SetActive(!PhotonNetwork.inRoom); //панель
+		GameUiView.gameObject.SetActive(PhotonNetwork.inRoom); //панель
 
-		ButtonCanvasGroup.interactable = PhotonNetwork.room!=null?PhotonNetwork.room.PlayerCount > 1:false;
+		ButtonCanvasGroup.interactable = PhotonNetwork.room!=null?PhotonNetwork.room.PlayerCount > 1:false; // активна ли клавиша
 	}
 
 

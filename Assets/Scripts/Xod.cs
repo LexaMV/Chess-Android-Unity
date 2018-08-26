@@ -6,10 +6,13 @@ using TMPro;
 using UnityEngine;
 
 public class Xod : MonoBehaviour {
-
+    // [SerializeField]
 	public String Igrok1Name;
+	// [SerializeField]
 	public String Igrok2Name;
+	// [SerializeField]
 	public bool StartIndex1; // белые
+	// [SerializeField]
 	public bool StartIndex2; // черные
 
 	void Start () {
