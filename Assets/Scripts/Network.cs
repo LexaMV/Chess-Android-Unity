@@ -46,9 +46,18 @@ public class Network : PunBehaviour, IPunTurnManagerCallbacks {
         throw new System.NotImplementedException();
     }
 
+
+    public void StartTurn() //¬ызов старта очереди(только на мастер клиенте может быть запущено)
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            this.turnManager.BeginTurn();
+        }
+    }
     public void OnEndTurn()
     {
         Debug.LogWarning("The end");
+        this.StartTurn();
     }
 
 	void Start ()
@@ -58,7 +67,10 @@ public class Network : PunBehaviour, IPunTurnManagerCallbacks {
         this.turnManager.TurnDuration = 5f; // врем€ ожидани€ между очеред€ми
         PhotonNetwork.ConnectUsingSettings(gameVersion); //подключаемс€
         PhotonHandler.StopFallbackSendAckThread(); // заморозил соединение
+        this.StartTurn();
 	}
+
+
 
  public virtual void OnConnectedToMaster()
     {
@@ -94,6 +106,9 @@ public class Network : PunBehaviour, IPunTurnManagerCallbacks {
 //     // GameObject.Find("Camera").GetComponent<Figure>().enabled = true;
 // }
 }
+
+
+
 }
 
 

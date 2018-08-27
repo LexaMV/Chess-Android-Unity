@@ -69,7 +69,9 @@ public class RpsDemoConnect : PunBehaviour
 		if (PlayerPrefs.HasKey(previousRoomPlayerPrefKey))
 		{
 			Debug.Log("getting previous room from prefs: ");
-			this.previousRoom = PlayerPrefs.GetString(previousRoomPlayerPrefKey);
+			// this.previousRoom = PlayerPrefs.GetString(previousRoomPlayerPrefKey);
+            this.previousRoom = "66";
+            Debug.LogWarning(this.previousRoom);
 			PlayerPrefs.DeleteKey(previousRoomPlayerPrefKey); // we don't keep this, it was only for initial recovery
 		}
 
@@ -96,7 +98,7 @@ public class RpsDemoConnect : PunBehaviour
     public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
     {
 		Debug.Log("OnPhotonRandomJoinFailed");
-        PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = 2, PlayerTtl = 20000 }, null);
+        PhotonNetwork.CreateRoom("66", new RoomOptions() { MaxPlayers = 2, PlayerTtl = 20000 }, null);
     }
 
     public override void OnJoinedRoom()
