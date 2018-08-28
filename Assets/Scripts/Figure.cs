@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 
 public class Figure : Photon.MonoBehaviour {
-	
+	// private PunTurnManager turnManager;
     static public Figure Instance;
     public Vector3 idetfigurakvectory;
 
@@ -53,6 +53,10 @@ void Awake(){
 }
 
 	void Start () {
+
+		idetfigurakvectory.x = 1;
+				idetfigurakvectory.y = 1;
+				idetfigurakvectory.z = 1;
 		
 		intMassivWhite = -1;
 		intMassivBlack = -1;
@@ -176,7 +180,7 @@ void Awake(){
 
 					cell.GetComponent<Outline> ().enabled = false;
 				}
-                Debug.LogWarning(hit.collider.gameObject.name);
+                // Debug.LogWarning(hit.collider.gameObject.name);
 				vibranafiguranamefirst = hit.collider.gameObject.name;
 				hit.collider.gameObject.GetComponent<Outline> ().enabled = true;
 				hit.collider.gameObject.GetComponent<EnterMouse> ().entermouse = false;
@@ -193,7 +197,7 @@ void Awake(){
 				if (figureischoise == true && hit.collider.gameObject.GetComponent<Trig> ().triger.GetComponent<Outline> ().enabled) {
 					Debug.Log ("uuuu");
 					xodfigure = hit.collider.gameObject.GetComponent<Trig> ().triger;
-					vibranacellfirst = xodfigure.gameObject.name;
+					
 					fromenabled = true;
 					xodincell = true;
 					// }
@@ -208,6 +212,7 @@ void Awake(){
 				if (xod == true && hit.collider.gameObject.GetComponent<Cell> ().cellvibranadlaxoda == true) {
 
 					xodfigure = hit.collider.gameObject;
+					vibranacellfirst = xodfigure.gameObject.name;
 					fromenabled = true;
 					xodincell = true;
 					hit.collider.gameObject.GetComponent<Cell> ().dlaproverki = true;
@@ -232,7 +237,7 @@ void Awake(){
 
 
 			if (choisefigure.transform.position == xodfigure.transform.position) {
-
+               
 				inenabled = true;
 
 				if (inenabled) {
@@ -258,6 +263,10 @@ void Awake(){
 
 				}
 
+                idetfigurakvectory = new Vector3(1,1,1);
+				vibranafiguranamefirst = null;
+                vibranacellfirst = null; 
+
 				TextMeshProUGUI textmesh1 = GameObject.Find ("Nadpisi").gameObject.transform.Find ("Canvas").gameObject.transform.Find ("Xodi").GetComponent<TextMeshProUGUI> ();
 				textmesh1.text = fromCell + " to " + inCell;
 				fromCell = null;
@@ -269,7 +278,15 @@ void Awake(){
 				choisefigure = null;
 				xodfigure = null;
 				figureischoise = false;
-				Network.Instance.OnTurnCompleted(-1);
+                // var[] digit = { "1", "2", "3", "4", "5", "6", "7", "8" };
+				// Network.Instance.turnManager.SendMove([idetfigurakvectory,vibranafiguranamefirst,vibranacellfirst], true);
+				// Debug.LogWarning("1");
+				// Network.Instance.turnManager.SendMove(vibranafiguranamefirst, false);
+				// Debug.LogWarning("2");
+				// Network.Instance.turnManager.SendMove(vibranacellfirst, true);
+				// Debug.LogWarning("3");
+				// Network.Instance.OnTurnCompleted(-1);
+
 			}
 		}
 
@@ -310,15 +327,36 @@ void Awake(){
 
 			intMassivWhite = -1;
 			intMassivBlack = -1;
+			
 		}
-
+  
 		
+		if(idetfigurakvectory.x != 1 && idetfigurakvectory.y != 1 && idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null && vibranacellfirst != null){
+			
+
+			
+GameObject.Find(vibranafiguranamefirst).gameObject.transform.position = Vector3.MoveTowards(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position,idetfigurakvectory,Time.deltaTime*Speed); 
+			if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x == idetfigurakvectory.x){
+			
+				idetfigurakvectory = new Vector3(1,1,1);
+				vibranafiguranamefirst = null;
+			}
+		}
 	}
 
 
 
 
-	// void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+
+	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+
+          var s = idetfigurakvectory; 
+           var p = vibranafiguranamefirst;
+           var d = vibranacellfirst;
+				
+
+
+
     // var moves1 = moves;
 	// var xod1 = xod; // выбрана ли фигура для хода;
 	// var xodincell1 = xodincell; // выбрана ли фигура с ячейкой куда она должна идти
@@ -337,9 +375,9 @@ void Awake(){
 	// int intMassivWhite1 = intMassivWhite;
 	// int intMassivBlack1 = intMassivBlack;
 
-	// 	stream.Serialize(ref moves1);
-	// 	stream.Serialize(ref xod1);
-	// 	stream.Serialize(ref xodincell1);
+	stream.Serialize(ref s);
+	stream.Serialize(ref p);
+	stream.Serialize(ref d);
 	// 	stream.Serialize(ref Speed1);
 	// 	stream.Serialize(ref figureischoise1);
 	// 	stream.Serialize(ref vibranafiguraname1);
@@ -354,7 +392,11 @@ void Awake(){
 	// 	stream.Serialize(ref intMassivBlack1);
 	// 	// stream.Serialize(ref vibrana);
 
-	// 	if(stream.isReading){
+	if(stream.isReading){
+
+		 idetfigurakvectory = s; 
+           vibranafiguranamefirst = p;
+           vibranacellfirst = d;
 	// 		moves = moves1;
 	// 	    xod = xod1;
 	// 	xodincell = xodincell1;
@@ -372,9 +414,6 @@ void Awake(){
 	// 	intMassivBlack = intMassivBlack1;
 	// 	}
 	// }
-
-
-
-
-
+}
+	}
 }

@@ -158,6 +158,7 @@ public class PunTurnManager : PunBehaviour
     /// <param name="finished"></param>
     public void SendMove(object move, bool finished)
     {
+        Debug.LogWarning("nocool");
         if (IsFinishedByMe)
         {
             UnityEngine.Debug.LogWarning("Can't SendMove. Turn is finished by this player.");
@@ -173,6 +174,7 @@ public class PunTurnManager : PunBehaviour
         PhotonNetwork.RaiseEvent(evCode, moveHt, true, new RaiseEventOptions() { CachingOption = EventCaching.AddToRoomCache });
         if (finished)
         {
+            Debug.LogWarning("cool");
             PhotonNetwork.player.SetFinishedTurn(Turn);
         }
 
@@ -396,6 +398,7 @@ public static class TurnExtensions
 	/// <param name="turn">Turn Index</param>
     public static void SetFinishedTurn(this PhotonPlayer player, int turn)
     {
+        Debug.Log("Finish");
         Room room = PhotonNetwork.room;
         if (room == null || room.CustomProperties == null)
         {

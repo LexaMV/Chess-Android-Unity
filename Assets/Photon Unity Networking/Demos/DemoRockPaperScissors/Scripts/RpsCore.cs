@@ -252,7 +252,8 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 
     public void OnTurnCompleted(int obj)   // Вызывается когда очередь завершена (завершается у всех игроков)
     {
-        Debug.Log("OnTurnCompleted: " + obj);
+
+        Debug.LogWarning("OnTurnCompleted: " + obj);
 
         this.CalculateWinAndLoss();
         this.UpdateScores();
