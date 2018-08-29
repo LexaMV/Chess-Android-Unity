@@ -53,7 +53,7 @@ void Awake(){
 }
 
 	void Start () {
-
+        PhotonView photonView = PhotonView.Get(this);
 		idetfigurakvectory.x = 1;
 				idetfigurakvectory.y = 1;
 				idetfigurakvectory.z = 1;
@@ -237,7 +237,7 @@ void Awake(){
 
 
 			if (choisefigure.transform.position == xodfigure.transform.position) {
-               
+            photonView.RPC("Xodiki",PhotonTargets.All);
 				inenabled = true;
 
 				if (inenabled) {
@@ -262,10 +262,9 @@ void Awake(){
 					GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 = true;
 
 				}
-
-                idetfigurakvectory = new Vector3(1,1,1);
-				vibranafiguranamefirst = null;
-                vibranacellfirst = null; 
+                 
+				
+               
 
 				TextMeshProUGUI textmesh1 = GameObject.Find ("Nadpisi").gameObject.transform.Find ("Canvas").gameObject.transform.Find ("Xodi").GetComponent<TextMeshProUGUI> ();
 				textmesh1.text = fromCell + " to " + inCell;
@@ -332,7 +331,28 @@ void Awake(){
   
 		
 		// if(idetfigurakvectory.x != 1 && idetfigurakvectory.y != 1 && idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null && vibranacellfirst != null){
-			if(idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null){
+	// 		if(idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null){
+			
+
+			
+
+	// 		// if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x != idetfigurakvectory.x){
+	// 		GameObject.Find(vibranafiguranamefirst).gameObject.transform.position = Vector3.MoveTowards(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position,idetfigurakvectory,Time.deltaTime*Speed); 
+				
+	// 		// }
+
+	// 		// else if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x == idetfigurakvectory.x){
+			
+	// 		// 	idetfigurakvectory = new Vector3(1,1,1);
+	// 		// 	vibranafiguranamefirst = null;
+	// 		// }
+	// 	// }
+	// }
+	}
+
+[PunRPC]
+void Xodiki(){
+if(idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null){
 			
 
 			
@@ -349,9 +369,7 @@ void Awake(){
 			// }
 		// }
 	}
-	}
-
-
+}
 
 
 
