@@ -382,8 +382,8 @@ void Awake(){
 		object[] data = (object[])content;
     idetfigurakvectory = (Vector3)data[0];
 	vibranafiguranamefirst = (String)data[1];
-	Xod.Instance.StartIndex1 = (bool)data[2];
-	Xod.Instance.StartIndex2 = (bool)data[3];
+	Xod.Instance.StartIndex1 = (bool)data[3];
+	Xod.Instance.StartIndex2 = (bool)data[2];
 	Debug.LogWarning("Vse1");
 			// Do something
 	}
@@ -394,8 +394,8 @@ void Awake(){
 		object[] data = (object[])content;
     idetfigurakvectory = (Vector3)data[0];
 	vibranafiguranamefirst = (String)data[1];
-	Xod.Instance.StartIndex1 = (bool)data[2];
-	Xod.Instance.StartIndex2 = (bool)data[3];
+	Xod.Instance.StartIndex1 = (bool)data[3];
+	Xod.Instance.StartIndex2 = (bool)data[2];
 	Debug.LogWarning("Vse2");
 			// Do something
 }
