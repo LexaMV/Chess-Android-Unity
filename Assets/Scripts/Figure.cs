@@ -377,14 +377,17 @@ void Awake(){
 
 	public void OnEvent(byte eventCode, object content, int senderId)
 {
+	if(PhotonNetwork.isMasterClient){
     if (eventCode == RaiseEventMaster){
 		object[] data = (object[])content;
     idetfigurakvectory = (Vector3)data[0];
 	vibranafiguranamefirst = (String)data[1];
 	Debug.LogWarning("Vse1");
 			// Do something
+	}
 }
 
+  if(!PhotonNetwork.isMasterClient){
   if (eventCode == RaiseEventClient){
 		object[] data = (object[])content;
     idetfigurakvectory = (Vector3)data[0];
@@ -392,6 +395,7 @@ void Awake(){
 	Debug.LogWarning("Vse2");
 			// Do something
 }
+  }
 }
 
 public void OnEnable()
