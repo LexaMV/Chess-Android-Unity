@@ -355,25 +355,25 @@ void Awake(){
 
 
 		
-		// if(idetfigurakvectory.x != 1 && idetfigurakvectory.y != 1 && idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null && vibranacellfirst != null){
-	// 		if(idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null){
+	// if(idetfigurakvectory.x != 1 && idetfigurakvectory.y != 1 && idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null && vibranacellfirst != null){
+	if(idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null){
 			
 
 			
 
-	// 		// if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x != idetfigurakvectory.x){
-	// 		GameObject.Find(vibranafiguranamefirst).gameObject.transform.position = Vector3.MoveTowards(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position,idetfigurakvectory,Time.deltaTime*Speed); 
+	if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x != idetfigurakvectory.x){
+	GameObject.Find(vibranafiguranamefirst).gameObject.transform.position = Vector3.MoveTowards(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position,idetfigurakvectory,Time.deltaTime*Speed); 
 				
-	// 		// }
-
-	// 		// else if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x == idetfigurakvectory.x){
-			
-	// 		// 	idetfigurakvectory = new Vector3(1,1,1);
-	// 		// 	vibranafiguranamefirst = null;
-	// 		// }
-	// 	// }
-	// }
 	}
+
+	else if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x == idetfigurakvectory.x){
+			
+	idetfigurakvectory = new Vector3(1,1,1);
+	vibranafiguranamefirst = null;
+	}
+	}
+	}
+	// }
 
 	public void OnEvent(byte eventCode, object content, int senderId)
 {
