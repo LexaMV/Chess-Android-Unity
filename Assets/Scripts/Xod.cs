@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 
 public class Xod : MonoBehaviour {
+	static public Xod Instance;
     // [SerializeField]
 	public String Igrok1Name;
 	// [SerializeField]
@@ -15,7 +16,11 @@ public class Xod : MonoBehaviour {
 	// [SerializeField]
 	public bool StartIndex2; // черные
 
+    void Awake(){
+	Instance = this;
+    }
 	void Start () {
+		
     //  if(PhotonNetwork.isMasterClient){
 	    Igrok1Name = "Кот";
 		Igrok2Name = "Собака";
@@ -24,25 +29,25 @@ public class Xod : MonoBehaviour {
 	//  }
 	}
 
-		void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
-		String s = Igrok1Name;
-		String d = Igrok2Name;
-		var a = StartIndex1;
-		var f = StartIndex2;
-		stream.Serialize(ref s);
-		stream.Serialize(ref d);
-		stream.Serialize(ref a);
-		stream.Serialize(ref f);
+	// 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+	// 	String s = Igrok1Name;
+	// 	String d = Igrok2Name;
+	// 	var a = StartIndex1;
+	// 	var f = StartIndex2;
+	// 	stream.Serialize(ref s);
+	// 	stream.Serialize(ref d);
+	// 	stream.Serialize(ref a);
+	// 	stream.Serialize(ref f);
 		
 
 
-		if(stream.isReading){
-			Igrok1Name = s;
-			Igrok2Name = d;
-			StartIndex1 = a;
-			StartIndex2 = f;
-		}
-	}
+	// 	if(stream.isReading){
+	// 		Igrok1Name = s;
+	// 		Igrok2Name = d;
+	// 		StartIndex1 = a;
+	// 		StartIndex2 = f;
+	// 	}
+	// }
 
     // void Update(){
 

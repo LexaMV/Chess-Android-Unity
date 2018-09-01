@@ -251,7 +251,7 @@ void Awake(){
 			//  RaiseEventMassiv.Add(c);
 			//  RaiseEventMassiv.Add(vibranafiguranamefirst);
 
-			object[] content = new object[] {idetfigurakvectory,vibranafiguranamefirst};
+			object[] content = new object[] {idetfigurakvectory,vibranafiguranamefirst,Xod.Instance.StartIndex1,Xod.Instance.StartIndex2};
 			//  Debug.Log(RaiseEventMassiv.Count);
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
@@ -382,6 +382,8 @@ void Awake(){
 		object[] data = (object[])content;
     idetfigurakvectory = (Vector3)data[0];
 	vibranafiguranamefirst = (String)data[1];
+	Xod.Instance.StartIndex1 = (bool)data[2];
+	Xod.Instance.StartIndex2 = (bool)data[3];
 	Debug.LogWarning("Vse1");
 			// Do something
 	}
@@ -392,6 +394,8 @@ void Awake(){
 		object[] data = (object[])content;
     idetfigurakvectory = (Vector3)data[0];
 	vibranafiguranamefirst = (String)data[1];
+	Xod.Instance.StartIndex1 = (bool)data[2];
+	Xod.Instance.StartIndex2 = (bool)data[3];
 	Debug.LogWarning("Vse2");
 			// Do something
 }
