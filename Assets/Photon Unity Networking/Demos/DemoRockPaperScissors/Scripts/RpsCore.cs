@@ -493,12 +493,13 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
 		RefreshUIViews();
     }
 
-    public override void OnJoinedRoom()
+    public override void OnJoinedRoom() //если я клиент
     {
 		RefreshUIViews();
 
         if (PhotonNetwork.room.PlayerCount == 2)
         {
+             Debug.LogWarning("Waiting for another player1");
             if (this.turnManager.Turn == 0)
             {
                 // when the room has two players, start the first turn (later on, joining players won't trigger a turn)
@@ -511,16 +512,20 @@ public class RpsCore : PunBehaviour, IPunTurnManagerCallbacks
         }
     }
 
-    public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer) // если я сервер
     {
+        	
 		Debug.Log("Other player arrived");
 
         if (PhotonNetwork.room.PlayerCount == 2)
         {
+         
             if (this.turnManager.Turn == 0)
             {
                 // when the room has two players, start the first turn (later on, joining players won't trigger a turn)
+                    Debug.LogWarning("Waiting for another player2");
                 this.StartTurn();
+
             }
         }
     }

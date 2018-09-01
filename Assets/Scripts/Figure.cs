@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Figure : Photon.MonoBehaviour {
 	// private PunTurnManager turnManager;
+	private readonly byte RaiseEventMaster = 0;
+	private readonly byte RaiseEventClient = 0;
     static public Figure Instance;
     public Vector3 idetfigurakvectory;
 
@@ -36,6 +38,7 @@ public class Figure : Photon.MonoBehaviour {
 	public int intMassivWhite;
 
 	public int intMassivBlack;
+    public List<String> RaiseEventMassiv;
 
 	public List<GameObject> NyjniiMassiv;
 	public List<GameObject> whitefigures;
@@ -53,7 +56,8 @@ void Awake(){
 }
 
 	void Start () {
-        PhotonView photonView = PhotonView.Get(this);
+	    RaiseEventMassiv = new List<String>();
+        PhotonView photonView = PhotonView.Get(gameObject);
 		idetfigurakvectory.x = 1;
 				idetfigurakvectory.y = 1;
 				idetfigurakvectory.z = 1;
@@ -231,13 +235,29 @@ void Awake(){
 			}
 
 		    idetfigurakvectory = xodfigure.transform.position;
+	
 			choisefigure.transform.position = Vector3.MoveTowards (choisefigure.transform.position, xodfigure.transform.position, Time.deltaTime * Speed);
 			
 		
 
 
 			if (choisefigure.transform.position == xodfigure.transform.position) {
-            photonView.RPC("Xodiki",PhotonTargets.All);
+            // photonView.RPC("XodNaNote()",PhotonTargets.All, PhotonNetwork.playerList as object);
+			//  String a = idetfigurakvectory.x.ToString();
+			//  String b = idetfigurakvectory.y.ToString();
+			//  String c = idetfigurakvectory.z.ToString();
+            //  RaiseEventMassiv.Add(a);
+			//  RaiseEventMassiv.Add(b);
+			//  RaiseEventMassiv.Add(c);
+			//  RaiseEventMassiv.Add(vibranafiguranamefirst);
+
+			object[] content = new object[] {idetfigurakvectory,vibranafiguranamefirst};
+			//  Debug.Log(RaiseEventMassiv.Count);
+	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+            //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
+			PhotonNetwork.RaiseEvent(RaiseEventClient,content,true, raiseEventOptions);
+			PhotonNetwork.RaiseEvent(RaiseEventMaster,content,true, raiseEventOptions);
+			// photonView.RPC("XodNaNote",PhotonTargets.Others, null);
 				inenabled = true;
 
 				if (inenabled) {
@@ -274,6 +294,7 @@ void Awake(){
 				xodincell = false;
 				choisefigure.GetComponent<Outline> ().enabled = false;
 				choisefigure.GetComponent<EnterMouse> ().entermouse = true;
+
 				choisefigure = null;
 				xodfigure = null;
 				figureischoise = false;
@@ -328,7 +349,11 @@ void Awake(){
 			intMassivBlack = -1;
 			
 		}
+
+
   
+
+
 		
 		// if(idetfigurakvectory.x != 1 && idetfigurakvectory.y != 1 && idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null && vibranacellfirst != null){
 	// 		if(idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null){
@@ -350,95 +375,125 @@ void Awake(){
 	// }
 	}
 
-[PunRPC]
-void Xodiki(){
-if(idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null){
-			
-
-			
-
-			// if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x != idetfigurakvectory.x){
-			GameObject.Find(vibranafiguranamefirst).gameObject.transform.position = Vector3.MoveTowards(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position,idetfigurakvectory,Time.deltaTime*Speed); 
-				
-			// }
-
-			// else if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x == idetfigurakvectory.x){
-			
-			// 	idetfigurakvectory = new Vector3(1,1,1);
-			// 	vibranafiguranamefirst = null;
-			// }
-		// }
-	}
+	public void OnEvent(byte eventCode, object content, int senderId)
+{
+    if (eventCode == RaiseEventMaster){
+		object[] data = (object[])content;
+    idetfigurakvectory = (Vector3)data[0];
+	vibranafiguranamefirst = (String)data[1];
+	Debug.LogWarning("Vse1");
+			// Do something
 }
 
+  if (eventCode == RaiseEventClient){
+		object[] data = (object[])content;
+    idetfigurakvectory = (Vector3)data[0];
+	vibranafiguranamefirst = (String)data[1];
+	Debug.LogWarning("Vse2");
+			// Do something
+}
+}
+
+public void OnEnable()
+{
+    PhotonNetwork.OnEventCall += OnEvent;
+}
+
+public void OnDisable()
+{
+    PhotonNetwork.OnEventCall -= OnEvent;
+}
+
+// [PunRPC]
+// void XodikiNaCompe(){
+// // if(idetfigurakvectory.z != 1 && vibranafiguranamefirst !=null){
+// 	Debug.LogWarning("Vizval na kompe");		
+
+			
+
+// 			// if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x != idetfigurakvectory.x){
+// 			// GameObject.Find(vibranafiguranamefirst).gameObject.transform.position = Vector3.MoveTowards(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position,idetfigurakvectory,Time.deltaTime*Speed); 
+// 				GameObject.Find(vibranafiguranamefirst).gameObject.transform.position = new Vector3(idetfigurakvectory.x, idetfigurakvectory.y, idetfigurakvectory.z);
+// 				// GameObject.Find(vibranafiguranamefirst).gameObject.transform.position = Vector3.MoveTowards(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position,idetfigurakvectory,Time.deltaTime*Speed); 
+// 			// }
+
+// 			// else if(GameObject.Find(vibranafiguranamefirst).gameObject.transform.position.x == idetfigurakvectory.x){
+			
+// 			// 	idetfigurakvectory = new Vector3(1,1,1);
+// 			// 	vibranafiguranamefirst = null;
+// 			// }
+// 		// }
+// 	// }
+// }
 
 
-	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
 
-          var s = idetfigurakvectory; 
-           var p = vibranafiguranamefirst;
-           var d = vibranacellfirst;
+// 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info){
+
+//           Vector3 k = idetfigurakvectory; 
+//            String i = vibranafiguranamefirst;
+//            String q = vibranacellfirst;
 				
 
 
 
-    // var moves1 = moves;
-	// var xod1 = xod; // выбрана ли фигура для хода;
-	// var xodincell1 = xodincell; // выбрана ли фигура с ячейкой куда она должна идти
-	// float Speed1 = Speed;
-	// var figureischoise1 = figureischoise; //проверка была ли ранее какая либо выбрана фигура или нет
-	// String vibranafiguraname1 = vibranafiguranamefirst;
-	// String vibranacellfirst1 = vibranacellfirst;
-	// // String vibrana = choisefigure.gameObject.name;
-	// // Debug.LogWarning(vibrana);
-	// // String xodfigure1 = xodfigure.name; // в какую ячейку пойдет фигура
-	// // String fromCell1 = fromCell; // с какой ячейки начинает ходить фигура
-    // bool j = fromenabled; // для string начальной ячейки
-	// Debug.Log(j);
-	// String inCell1 = inCell; // в какую ячейку идет фигура
-	// bool n = inenabled; // для string конечной ячейки
-	// int intMassivWhite1 = intMassivWhite;
-	// int intMassivBlack1 = intMassivBlack;
+//     // var moves1 = moves;
+// 	// var xod1 = xod; // выбрана ли фигура для хода;
+// 	// var xodincell1 = xodincell; // выбрана ли фигура с ячейкой куда она должна идти
+// 	// float Speed1 = Speed;
+// 	// var figureischoise1 = figureischoise; //проверка была ли ранее какая либо выбрана фигура или нет
+// 	// String vibranafiguraname1 = vibranafiguranamefirst;
+// 	// String vibranacellfirst1 = vibranacellfirst;
+// 	// // String vibrana = choisefigure.gameObject.name;
+// 	// // Debug.LogWarning(vibrana);
+// 	// // String xodfigure1 = xodfigure.name; // в какую ячейку пойдет фигура
+// 	// // String fromCell1 = fromCell; // с какой ячейки начинает ходить фигура
+//     // bool j = fromenabled; // для string начальной ячейки
+// 	// Debug.Log(j);
+// 	// String inCell1 = inCell; // в какую ячейку идет фигура
+// 	// bool n = inenabled; // для string конечной ячейки
+// 	// int intMassivWhite1 = intMassivWhite;
+// 	// int intMassivBlack1 = intMassivBlack;
 
-	stream.Serialize(ref s);
-	stream.Serialize(ref p);
-	stream.Serialize(ref d);
-	// 	stream.Serialize(ref Speed1);
-	// 	stream.Serialize(ref figureischoise1);
-	// 	stream.Serialize(ref vibranafiguraname1);
-	// 	stream.Serialize(ref vibranacellfirst1);
+// 	stream.Serialize(ref k);
+// 	stream.Serialize(ref i);
+// 	stream.Serialize(ref q);
+// 	// 	stream.Serialize(ref Speed1);
+// 	// 	stream.Serialize(ref figureischoise1);
+// 	// 	stream.Serialize(ref vibranafiguraname1);
+// 	// 	stream.Serialize(ref vibranacellfirst1);
 
-	// 	// stream.Serialize(ref xodfigure1);
-	// 	// stream.Serialize(ref fromCell1);
-	// 	stream.Serialize(ref j);
-	// 	stream.Serialize(ref inCell1);
-	// 	stream.Serialize(ref n);
-	// 	stream.Serialize(ref intMassivWhite1);
-	// 	stream.Serialize(ref intMassivBlack1);
-	// 	// stream.Serialize(ref vibrana);
+// 	// 	// stream.Serialize(ref xodfigure1);
+// 	// 	// stream.Serialize(ref fromCell1);
+// 	// 	stream.Serialize(ref j);
+// 	// 	stream.Serialize(ref inCell1);
+// 	// 	stream.Serialize(ref n);
+// 	// 	stream.Serialize(ref intMassivWhite1);
+// 	// 	stream.Serialize(ref intMassivBlack1);
+// 	// 	// stream.Serialize(ref vibrana);
 
-	if(stream.isReading){
+// 	if(stream.isReading){
 
-		 idetfigurakvectory = s; 
-           vibranafiguranamefirst = p;
-           vibranacellfirst = d;
-	// 		moves = moves1;
-	// 	    xod = xod1;
-	// 	xodincell = xodincell1;
-	// 	Speed = Speed1;
-	// 	figureischoise = figureischoise1;
-	// 	vibranafiguranamefirst = vibranafiguraname1;
-	// 	vibranacellfirst = vibranacellfirst1;
-	// 	// choisefigure.gameObject.name =  vibranafiguraname1;
-	// 	// xodfigure = GameObject.Find(xodfigure1).gameObject;
-	// 	// fromCell = fromCell1;
-	// 	fromenabled = j;
-	// 	inCell = inCell1;
-	// 	inenabled = n;
-	// 	intMassivWhite = intMassivWhite1;
-	// 	intMassivBlack = intMassivBlack1;
-	// 	}
-	// }
-}
-	}
+// 		 idetfigurakvectory = k; 
+//            vibranafiguranamefirst = i;
+//            vibranacellfirst = q;
+// 	// 		moves = moves1;
+// 	// 	    xod = xod1;
+// 	// 	xodincell = xodincell1;
+// 	// 	Speed = Speed1;
+// 	// 	figureischoise = figureischoise1;
+// 	// 	vibranafiguranamefirst = vibranafiguraname1;
+// 	// 	vibranacellfirst = vibranacellfirst1;
+// 	// 	// choisefigure.gameObject.name =  vibranafiguraname1;
+// 	// 	// xodfigure = GameObject.Find(xodfigure1).gameObject;
+// 	// 	// fromCell = fromCell1;
+// 	// 	fromenabled = j;
+// 	// 	inCell = inCell1;
+// 	// 	inenabled = n;
+// 	// 	intMassivWhite = intMassivWhite1;
+// 	// 	intMassivBlack = intMassivBlack1;
+// 	// 	}
+// 	// }
+// }
+// 	}
 }
