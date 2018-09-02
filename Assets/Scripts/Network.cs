@@ -2,28 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // public class Network : PunBehaviour, IPunTurnManagerCallbacks {
-    public class Network : PunBehaviour {
+public class Network : PunBehaviour {
+    private readonly byte RedGOPlay = 0;
+    private readonly byte WhiteGOPlay = 0;
     public static Network Instance;
+
+    public GameObject RedGO;
+    public GameObject WhiteGO;
+    public string RedGOString;
+    public string WhiteGOString;
+
     // public PunTurnManager turnManager;
 
 	// Use this for initialization
-    public int c;
+
 	string gameVersion = "0.1"; 
 	void Awake(){
+        RedGO = GameObject.Find("Red");
+        WhiteGO = GameObject.Find("White");
         Instance = this;
 		PhotonNetwork.autoJoinLobby = false;
 		PhotonNetwork.automaticallySyncScene = true;
 	}
 	void Start ()
-    {
+    {     
+        RedGO.GetComponent<Button>().enabled = false;
+        WhiteGO.GetComponent<Button>().enabled = false;
         // this.turnManager = this.gameObject.AddComponent<PunTurnManager>(); // добавили компанент  
         // this.turnManager.TurnManagerListener = this; // добавили слушетел€
         // this.turnManager.TurnDuration = 5f; // врем€ ожидани€ между очеред€ми
         PhotonNetwork.ConnectUsingSettings(gameVersion); //подключаемс€
         PhotonHandler.StopFallbackSendAckThread(); // заморозил соединение
 	}
+
+    void Update(){
+        if(RedGOString == "RedGO"){
+            WhiteGO.GetComponent<Button>().enabled = false;
+            RedGOString = null;
+        }
+        
+        if(RedGOString == "RedGO"){
+            WhiteGO.GetComponent<Button>().enabled = false;
+            WhiteGOString = null;
+        }
+    }
     public virtual void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
@@ -37,6 +63,8 @@ using UnityEngine;
 
     public void OnJoinedRoom()
     {
+             RedGO.GetComponent<Button>().enabled = true;
+             WhiteGO.GetComponent<Button>().enabled = true;
     //      {
 
     //     // if (PhotonNetwork.room.PlayerCount != 2)
@@ -54,6 +82,30 @@ using UnityEngine;
     //     // }
     // }
     }
+
+    public void RedGOButton(){
+        
+    RedGOString = "RedGO";
+    object[] content = new object[] {RedGOString};
+			//  Debug.Log(RaiseEventMassiv.Count);
+	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+            //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
+			PhotonNetwork.RaiseEvent(RedGOPlay,content,true, raiseEventOptions);
+            SceneManager.LoadScene("2");
+    }
+
+    public void WhiteGOButton(){
+          
+     WhiteGOString = "WhiteGO";
+    object[] content = new object[] {WhiteGOString};
+			//  Debug.Log(RaiseEventMassiv.Count);
+	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+            //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
+			PhotonNetwork.RaiseEvent(WhiteGOPlay,content,true, raiseEventOptions);
+    SceneManager.LoadScene("2");
+    }
+
+
 
     // public void StartTurn() //¬ызов старта очереди(только на мастер клиенте может быть запущено)
     // {
@@ -144,6 +196,35 @@ using UnityEngine;
 // }
 // }
 
+
+	public void OnEvent(byte eventCode, object content, int senderId)
+{
+	
+    if (eventCode == RedGOPlay){
+		object[] data = (object[])content;
+    RedGOString = (string)data[0];
+	Debug.LogWarning("RedGo");
+			// Do something
+	}
+
+    if (eventCode == WhiteGOPlay){
+	object[] data = (object[])content;
+    WhiteGOString = (string)data[0];
+	Debug.LogWarning("WhiteGo");
+			// Do something
+	}
+}
+
+
+public void OnEnable()
+{
+    PhotonNetwork.OnEventCall += OnEvent;
+}
+
+public void OnDisable()
+{
+    PhotonNetwork.OnEventCall -= OnEvent;
+}
 
 
 }
