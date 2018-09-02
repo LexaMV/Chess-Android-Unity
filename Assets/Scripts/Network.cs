@@ -108,7 +108,7 @@ public class Network : PunBehaviour {
         
     RedGOString = "RedGO";
     int a = 1;
-    object[] content = new object[] {WhiteGOString, a};
+    object[] content = new object[] {RedGOString, a};
 			//  Debug.Log(RaiseEventMassiv.Count);
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
