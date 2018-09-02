@@ -12,7 +12,9 @@ public class Network : PunBehaviour {
     public static Network Instance;
 
     public GameObject RedGO;
+    public GameObject RedGOText;
     public GameObject WhiteGO;
+    public GameObject WhiteGOText;
     public string RedGOString;
     public string WhiteGOString;
 
@@ -23,7 +25,9 @@ public class Network : PunBehaviour {
 	string gameVersion = "0.1"; 
 	void Awake(){
         RedGO = GameObject.Find("Red");
+        RedGOText = GameObject.Find("RedText");
         WhiteGO = GameObject.Find("White");
+        WhiteGOText = GameObject.Find("WhiteText");
         Instance = this;
 		PhotonNetwork.autoJoinLobby = false;
 		PhotonNetwork.automaticallySyncScene = true;
@@ -40,13 +44,18 @@ public class Network : PunBehaviour {
 	}
 
     void Update(){
+        
         if(RedGOString == "RedGO"){
-            WhiteGO.GetComponent<Button>().enabled = false;
+            RedGO.SetActive(false);
+            RedGOText.SetActive(false);
             RedGOString = null;
         }
         
-        if(RedGOString == "RedGO"){
-            WhiteGO.GetComponent<Button>().enabled = false;
+        else if(WhiteGOString == "WhiteGO"){
+            WhiteGO.SetActive(false);
+            WhiteGOText.SetActive(false);
+            Debug.LogWarning("Yes");
+            
             WhiteGOString = null;
         }
     }
@@ -91,7 +100,7 @@ public class Network : PunBehaviour {
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
 			PhotonNetwork.RaiseEvent(RedGOPlay,content,true, raiseEventOptions);
-            SceneManager.LoadScene("2");
+            // SceneManager.LoadScene("2");
     }
 
     public void WhiteGOButton(){
@@ -102,7 +111,8 @@ public class Network : PunBehaviour {
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
 			PhotonNetwork.RaiseEvent(WhiteGOPlay,content,true, raiseEventOptions);
-    SceneManager.LoadScene("2");
+            // WhiteGO.SetActive(false);
+    // SceneManager.LoadScene("2");
     }
 
 

@@ -873,7 +873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -430, y: -56}
+  m_AnchoredPosition: {x: -430, y: -59}
   m_SizeDelta: {x: 855, y: 950}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1776789040
@@ -1127,7 +1127,6 @@ GameObject:
   - component: {fileID: 1881880074}
   - component: {fileID: 1881880073}
   - component: {fileID: 1881880072}
-  - component: {fileID: 1881880076}
   - component: {fileID: 1881880077}
   m_Layer: 0
   m_Name: Main Camera
@@ -1158,8 +1157,8 @@ Camera:
   m_GameObject: {fileID: 1881880071}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1199,17 +1198,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1881880076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1881880071}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8d0d0c3b75d2674bb5968b3ee9def2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1881880077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,4 +1210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RedGO: {fileID: 0}
+  RedGOText: {fileID: 0}
   WhiteGO: {fileID: 0}
+  WhiteGOText: {fileID: 0}
+  RedGOString: 
+  WhiteGOString: 
