@@ -59,12 +59,15 @@ public class Network : PunBehaviour {
             RedGO.SetActive(false);
             RedGOText.SetActive(false);
              RedGOString = null;
+             i = 0;
              
   }
         
     else if(WhiteGOString == "WhiteGO" &&  i == 1){
      WhiteGO.SetActive(false);
     WhiteGOText.SetActive(false);
+    WhiteGOString = null;
+    i = 0;
      Debug.LogWarning("Yes");
       }
    }
@@ -109,6 +112,13 @@ public class Network : PunBehaviour {
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
 			PhotonNetwork.RaiseEvent(RedGOPlay,content,true, raiseEventOptions);
+              RedGOString = null;
+            Background.SetActive(true);
+            CanvasViboraXoda.SetActive(false);
+            CameraViboraXoda.SetActive(false);
+            GameCamera.SetActive(true);
+            GameCamera.GetComponent<Xod>().enabled = true;
+            GameCamera.GetComponent<HiddenGO>().enabled = true;
            
     }
 
@@ -230,6 +240,7 @@ public class Network : PunBehaviour {
     if (eventCode == RedGOPlay){
 		object[] data = (object[])content;
     RedGOString = (string)data[0];
+    i = (int)data[1];
 	Debug.LogWarning("RedGo");
 			// Do something
 	}
