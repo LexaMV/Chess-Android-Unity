@@ -344,8 +344,8 @@ public class HiddenGO : Photon.MonoBehaviour {
 			}
   		}
 
-      GameObject.Find("Camera").GetComponent<Figure>().enabled = true;
-	  GameObject.Find("Camera").GetComponent<Network>().enabled = true;
+      GameObject.Find("GameCamera").GetComponent<Figure>().enabled = true;
+	//   GameObject.Find("Camera").GetComponent<Network>().enabled = true;
 	//   Master1 = true;
 	//   }
 	  

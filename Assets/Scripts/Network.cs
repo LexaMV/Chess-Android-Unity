@@ -10,10 +10,14 @@ public class Network : PunBehaviour {
     private readonly byte RedGOPlay = 0;
     private readonly byte WhiteGOPlay = 0;
     public static Network Instance;
-
+    int i = 0;
     public GameObject RedGO;
     public GameObject RedGOText;
     public GameObject WhiteGO;
+    public GameObject Background;
+    public GameObject CameraViboraXoda;
+    public GameObject GameCamera;
+    public GameObject CanvasViboraXoda;
     public GameObject WhiteGOText;
     public string RedGOString;
     public string WhiteGOString;
@@ -24,16 +28,22 @@ public class Network : PunBehaviour {
 
 	string gameVersion = "0.1"; 
 	void Awake(){
+        Background = GameObject.Find("Background");
         RedGO = GameObject.Find("Red");
         RedGOText = GameObject.Find("RedText");
         WhiteGO = GameObject.Find("White");
         WhiteGOText = GameObject.Find("WhiteText");
+        CanvasViboraXoda = GameObject.Find("CanvasViboraXoda");
+        CameraViboraXoda = GameObject.Find("CameraViboraXoda");
+        GameCamera = GameObject.Find("GameCamera");
         Instance = this;
 		PhotonNetwork.autoJoinLobby = false;
 		PhotonNetwork.automaticallySyncScene = true;
 	}
 	void Start ()
-    {     
+    {   
+        GameCamera.SetActive(false);
+        Background.SetActive(false);
         RedGO.GetComponent<Button>().enabled = false;
         WhiteGO.GetComponent<Button>().enabled = false;
         // this.turnManager = this.gameObject.AddComponent<PunTurnManager>(); // добавили компанент  
@@ -45,20 +55,19 @@ public class Network : PunBehaviour {
 
     void Update(){
         
-        if(RedGOString == "RedGO"){
+        if(RedGOString == "RedGO" &&  i == 1){
             RedGO.SetActive(false);
             RedGOText.SetActive(false);
-            RedGOString = null;
-        }
+             RedGOString = null;
+             
+  }
         
-        else if(WhiteGOString == "WhiteGO"){
-            WhiteGO.SetActive(false);
-            WhiteGOText.SetActive(false);
-            Debug.LogWarning("Yes");
-            
-            WhiteGOString = null;
-        }
-    }
+    else if(WhiteGOString == "WhiteGO" &&  i == 1){
+     WhiteGO.SetActive(false);
+    WhiteGOText.SetActive(false);
+     Debug.LogWarning("Yes");
+      }
+   }
     public virtual void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
@@ -100,19 +109,27 @@ public class Network : PunBehaviour {
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
 			PhotonNetwork.RaiseEvent(RedGOPlay,content,true, raiseEventOptions);
-            // SceneManager.LoadScene("2");
+           
     }
 
     public void WhiteGOButton(){
           
      WhiteGOString = "WhiteGO";
-    object[] content = new object[] {WhiteGOString};
+     int a = 1;
+     object[] content = new object[] {WhiteGOString, a};
 			//  Debug.Log(RaiseEventMassiv.Count);
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
 			PhotonNetwork.RaiseEvent(WhiteGOPlay,content,true, raiseEventOptions);
             // WhiteGO.SetActive(false);
-    // SceneManager.LoadScene("2");
+            WhiteGOString = null;
+            Background.SetActive(true);
+            CanvasViboraXoda.SetActive(false);
+            CameraViboraXoda.SetActive(false);
+            GameCamera.SetActive(true);
+            GameCamera.GetComponent<Xod>().enabled = true;
+            GameCamera.GetComponent<HiddenGO>().enabled = true;
+            
     }
 
 
@@ -220,6 +237,7 @@ public class Network : PunBehaviour {
     if (eventCode == WhiteGOPlay){
 	object[] data = (object[])content;
     WhiteGOString = (string)data[0];
+    i = (int)data[1];
 	Debug.LogWarning("WhiteGo");
 			// Do something
 	}

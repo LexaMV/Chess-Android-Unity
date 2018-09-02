@@ -19,7 +19,7 @@ public class Figure : Photon.MonoBehaviour {
 	public bool xodincell = false; // выбрана ли фигура с ячейкой куда она должна идти
 
 	private float Speed = 4.0f;
-	public Camera camera;
+	public Camera GameCamera;
 	 
 	private bool figureischoise = false; //проверка была ли ранее какая либо выбрана фигура или нет
 
@@ -101,33 +101,33 @@ void Awake(){
 		if (Input.GetMouseButtonDown (0)) {
 			//  if(!photonView.isMine){
 
-			Ray ray = camera.ScreenPointToRay (Input.mousePosition);
+			Ray ray = GameCamera.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast (ray, out hit)) {
 
 				// 	if(figureischoise == false && xod == false) {
 
-				//     if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("white")){
+				//     if(GameObject.Find("GameCamera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("white")){
 				//             TextMeshProUGUI textmeshName = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
-				//             textmeshName.text = GameObject.Find("Camera").GetComponent<Xod>().Igrok1Name;
+				//             textmeshName.text = GameObject.Find("GameCamera").GetComponent<Xod>().Igrok1Name;
 				//          	hit.collider.gameObject.GetComponent<Outline>().enabled = true;
 				// 			hit.collider.gameObject.GetComponent<EnterMouse>().entermouse = false;
 				// 			figureischoise = true;
 				// 			choisefigure = hit.collider.gameObject;
-				// 			camera.GetComponent<Moves>().enabled = true;
+				// 			GameCamera.GetComponent<Moves>().enabled = true;
 				// 		    xod = true;
 				// 			moves = true;
 				//     }
 
-				//     if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("black")){
+				//     if(GameObject.Find("GameCamera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("black")){
 
 				// 			TextMeshProUGUI textmeshName = GameObject.Find("Nadpisi").gameObject.transform.Find("Canvas").gameObject.transform.Find("Igrok").GetComponent<TextMeshProUGUI>();
-				//             textmeshName.text = GameObject.Find("Camera").GetComponent<Xod>().Igrok2Name;
+				//             textmeshName.text = GameObject.Find("GameCamera").GetComponent<Xod>().Igrok2Name;
 				//          	hit.collider.gameObject.GetComponent<Outline>().enabled = true;
 				// 			hit.collider.gameObject.GetComponent<EnterMouse>().entermouse = false;
 				// 			figureischoise = true;
 				// 			choisefigure = hit.collider.gameObject;
-				// 			camera.GetComponent<Moves>().enabled = true;
+				// 			GameCamera.GetComponent<Moves>().enabled = true;
 				// 		    xod = true;
 				// 			moves = true;
 				//     }
@@ -137,14 +137,14 @@ void Awake(){
 
 				// if(choisefigure != null){
 
-				// if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("black")){
+				// if(GameObject.Find("GameCamera").GetComponent<Xod>().StartIndex1 == true && hit.collider.gameObject.name.Contains("black")){
 
 				// xodfigure = hit.collider.gameObject;
 				// fromenabled = true;
 				// xodincell = true;
 				// }
 
-				// if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("white")){
+				// if(GameObject.Find("GameCamera").GetComponent<Xod>().StartIndex2 == true && hit.collider.gameObject.name.Contains("white")){
 
 				// xodfigure = hit.collider.gameObject;
 				// fromenabled = true;
@@ -153,10 +153,10 @@ void Awake(){
 
 				// }
 
-				if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == true && hit.collider.gameObject.name.Contains ("white")) {
+				if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 == true && hit.collider.gameObject.name.Contains ("white")) {
 
 					TextMeshProUGUI textmeshName = GameObject.Find ("Nadpisi").gameObject.transform.Find ("Canvas").gameObject.transform.Find ("Igrok").GetComponent<TextMeshProUGUI> ();
-					textmeshName.text = GameObject.Find ("Camera").GetComponent<Xod> ().Igrok1Name;
+					textmeshName.text = GameObject.Find ("GameCamera").GetComponent<Xod> ().Igrok1Name;
 
 					foreach (GameObject cell in NyjniiMassiv) {
 
@@ -168,17 +168,17 @@ void Awake(){
 					hit.collider.gameObject.GetComponent<EnterMouse> ().entermouse = false;
 					choisefigure = hit.collider.gameObject;
 					choisefigure.GetComponent<Outline> ().enabled = true;
-					camera.GetComponent<Moves> ().enabled = true;
+					GameCamera.GetComponent<Moves> ().enabled = true;
 					moves = true;
 					xod = true;
 					figureischoise = true;
 				}
 			}
 
-			if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 == true && hit.collider.gameObject.name.Contains ("black")) {
+			if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex2 == true && hit.collider.gameObject.name.Contains ("black")) {
 
 				TextMeshProUGUI textmeshName = GameObject.Find ("Nadpisi").gameObject.transform.Find ("Canvas").gameObject.transform.Find ("Igrok").GetComponent<TextMeshProUGUI> ();
-				textmeshName.text = GameObject.Find ("Camera").GetComponent<Xod> ().Igrok2Name;
+				textmeshName.text = GameObject.Find ("GameCamera").GetComponent<Xod> ().Igrok2Name;
 
 				foreach (GameObject cell in NyjniiMassiv) {
 
@@ -190,13 +190,13 @@ void Awake(){
 				hit.collider.gameObject.GetComponent<EnterMouse> ().entermouse = false;
 				choisefigure = hit.collider.gameObject;
 				choisefigure.GetComponent<Outline> ().enabled = true;
-				camera.GetComponent<Moves> ().enabled = true;
+				GameCamera.GetComponent<Moves> ().enabled = true;
 				moves = true;
 				xod = true;
 				figureischoise = true;
 			}
 
-			if ((GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 == true && hit.collider.gameObject.name.Contains ("white")) || (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == true && hit.collider.gameObject.name.Contains ("black"))) {
+			if ((GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex2 == true && hit.collider.gameObject.name.Contains ("white")) || (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 == true && hit.collider.gameObject.name.Contains ("black"))) {
 
 				if (figureischoise == true && hit.collider.gameObject.GetComponent<Trig> ().triger.GetComponent<Outline> ().enabled) {
 					Debug.Log ("uuuu");
@@ -271,15 +271,15 @@ void Awake(){
 					cell.GetComponent<Cell> ().cellvibranadlaxoda = false;
 				}
 
-				if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == true) {
+				if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 == true) {
 
-					GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 = true;
-					GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 = false;
+					GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex2 = true;
+					GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 = false;
 
-				} else if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == false) {
+				} else if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 == false) {
 
-					GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 = false;
-					GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 = true;
+					GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex2 = false;
+					GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 = true;
 
 				}
                  
@@ -331,14 +331,14 @@ void Awake(){
 		}
 
 		if (intMassivWhite != -1 || intMassivBlack != -1) {
-			if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == true) {
+			if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 == true) {
 
 				GameObject delwhite = whitefigures[intMassivWhite];
 				whitefigures.RemoveAt (intMassivWhite);
 				Destroy (delwhite.gameObject);
 			}
 
-			if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 == true) {
+			if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex2 == true) {
 
 				GameObject delblack = blackfigures[intMassivBlack];
 				blackfigures.RemoveAt (intMassivBlack);

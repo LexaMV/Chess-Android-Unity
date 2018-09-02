@@ -9,22 +9,22 @@ public class EnterMouse : Photon.MonoBehaviour {
      
         if (gameObject.name.Contains ("white") || gameObject.name.Contains ("black")) {
 
-            if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == false && gameObject.name.Contains ("white")) {
+            if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 == false && gameObject.name.Contains ("white")) {
 
                 gameObject.GetComponent<Outline> ().enabled = false;
             }
 
-            if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 == false && gameObject.name.Contains ("black")) {
+            if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex2 == false && gameObject.name.Contains ("black")) {
 
                 gameObject.GetComponent<Outline> ().enabled = false;
             }
 
-            if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == true && gameObject.name.Contains ("white")) {
+            if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex1 == true && gameObject.name.Contains ("white")) {
 
                 gameObject.GetComponent<Outline> ().enabled = true;
             }
 
-            if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 == true && gameObject.name.Contains ("black")) {
+            if (GameObject.Find ("GameCamera").GetComponent<Xod> ().StartIndex2 == true && gameObject.name.Contains ("black")) {
 
                 gameObject.GetComponent<Outline> ().enabled = true;
             }
