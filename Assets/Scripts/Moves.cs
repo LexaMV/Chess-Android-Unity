@@ -215,7 +215,8 @@ public class Moves : MonoBehaviour {
 #endregion
 		
 		#region  Knight
-			if (gameObject.GetComponent<Figure> ().choisefigure.name.Contains ("knight")) {
+			if (gameObject.GetComponent<Figure> ().choisefigure.name.Contains ("horse")) {
+				
 
 				String s = gameObject.GetComponent<Figure> ().choisefigure.GetComponent<Trig> ().triger.name;
 				String first = s.Substring (0, 1);
@@ -244,20 +245,20 @@ public class Moves : MonoBehaviour {
 					}
 				}
 
-				if (b - 2 >= 0) {
+				// if (b - 2 >= 0) {
 
-					String stringLeft = gameObject.GetComponent<HiddenGO> ().letters[b - 2];
-					if (intsecond + 1 <= 8) {
+				// 	String stringLeft = gameObject.GetComponent<HiddenGO> ().letters[b - 2];
+				// 	if (intsecond + 1 <= 8) {
 
-						String finalStringLeftup = stringLeft + leftrightintup.ToString ();
-						cell.Add (finalStringLeftup);
-					}
-					if (intsecond - 1 >= 1) {
+				// 		String finalStringLeftup = stringLeft + leftrightintup.ToString ();
+				// 		cell.Add (finalStringLeftup);
+				// 	}
+				// 	if (intsecond - 1 >= 1) {
 
-						String finalStringLeftdown = stringLeft + leftrightintdown.ToString ();
-						cell.Add (finalStringLeftdown);
-					}
-				}
+				// 		String finalStringLeftdown = stringLeft + leftrightintdown.ToString ();
+				// 		cell.Add (finalStringLeftdown);
+				// 	}
+				// }
 
 				if (b + 1 <= 7) {
 
@@ -276,54 +277,58 @@ public class Moves : MonoBehaviour {
 					}
 				}
 
-				if (b + 2 <= 7) {
-					String stringRight = gameObject.GetComponent<HiddenGO> ().letters[b + 2];
+				// if (b + 2 <= 7) {
+				// 	String stringRight = gameObject.GetComponent<HiddenGO> ().letters[b + 2];
 
-					if (intsecond + 1 <= 8) {
+				// 	if (intsecond + 1 <= 8) {
 
-						String finalStringRightup = stringRight + leftrightintup.ToString ();
-						cell.Add (finalStringRightup);
-					}
+				// 		String finalStringRightup = stringRight + leftrightintup.ToString ();
+				// 		cell.Add (finalStringRightup);
+				// 	}
 
-					if (intsecond - 1 >= 1) {
+				// 	if (intsecond - 1 >= 1) {
 
-						String finalStringRightdown = stringRight + leftrightintdown.ToString ();
-						cell.Add (finalStringRightdown);
-					}
-				}
+				// 		String finalStringRightdown = stringRight + leftrightintdown.ToString ();
+				// 		cell.Add (finalStringRightdown);
+				// 	}
+				// }
 
-				foreach (String prefecs in cell) {
+		
 
-					if (prefecs != null) {
+				// foreach (String prefecs in cell) {
 
-						if (GameObject.Find (prefecs).GetComponent<Cell> ().stoitfigura == true) {
+				// 	if (prefecs != null) {
 
-							// 	 if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && GameObject.Find(prefecs).GetComponent<Cell>().figeureName.Contains("white")
-							//  || GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && GameObject.Find(prefecs).GetComponent<Cell>().figeureName.Contains("black")){
-							//  konecCiklaCelldigitIntPlus = false;
-							//  break;
-							//  }
+				// 		if (GameObject.Find (prefecs).GetComponent<Cell> ().stoitfigura == true) {
 
-							if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 == true && GameObject.Find (prefecs).GetComponent<Cell> ().figeureName.Contains ("white") ||
-								GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == true && GameObject.Find (prefecs).GetComponent<Cell> ().figeureName.Contains ("black")) {
-								GameObject.Find (prefecs).GetComponent<Outline> ().enabled = true;
-								GameObject.Find (prefecs).GetComponent<Outline> ().color = 0;
-								GameObject.Find (prefecs).GetComponent<Cell> ().cell = false;
-								GameObject.Find (prefecs).GetComponent<Cell> ().cellvibranadlaxoda = true;
-								//  konecCiklaCelldigitIntPlus = false;
-								//  break;
-							}
-						}
+				// 			// 	 if(GameObject.Find("Camera").GetComponent<Xod>().StartIndex1 == true && GameObject.Find(prefecs).GetComponent<Cell>().figeureName.Contains("white")
+				// 			//  || GameObject.Find("Camera").GetComponent<Xod>().StartIndex2 == true && GameObject.Find(prefecs).GetComponent<Cell>().figeureName.Contains("black")){
+				// 			//  konecCiklaCelldigitIntPlus = false;
+				// 			//  break;
+				// 			//  }
 
-						if (GameObject.Find (prefecs).GetComponent<Cell> ().stoitfigura == false) {
-							GameObject.Find (prefecs).GetComponent<Outline> ().enabled = true;
-							GameObject.Find (prefecs).GetComponent<Outline> ().color = 1;
-							GameObject.Find (prefecs).GetComponent<Cell> ().cell = false;
-							GameObject.Find (prefecs).GetComponent<Cell> ().cellvibranadlaxoda = true;
-						}
-					}
-				}
+				// 			if (GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex2 == true && GameObject.Find (prefecs).GetComponent<Cell> ().figeureName.Contains ("white") ||
+				// 				GameObject.Find ("Camera").GetComponent<Xod> ().StartIndex1 == true && GameObject.Find (prefecs).GetComponent<Cell> ().figeureName.Contains ("black")) {
+				// 				GameObject.Find (prefecs).GetComponent<Outline> ().enabled = true;
+				// 				GameObject.Find (prefecs).GetComponent<Outline> ().color = 0;
+				// 				GameObject.Find (prefecs).GetComponent<Cell> ().cell = false;
+				// 				GameObject.Find (prefecs).GetComponent<Cell> ().cellvibranadlaxoda = true;
+				// 				//  konecCiklaCelldigitIntPlus = false;
+				// 				//  break;
+				// 			}
+				// 		}
 
+				// 		if (GameObject.Find (prefecs).GetComponent<Cell> ().stoitfigura == false) {
+				// 			GameObject.Find (prefecs).GetComponent<Outline> ().enabled = true;
+				// 			GameObject.Find (prefecs).GetComponent<Outline> ().color = 1;
+				// 			GameObject.Find (prefecs).GetComponent<Cell> ().cell = false;
+				// 			GameObject.Find (prefecs).GetComponent<Cell> ().cellvibranadlaxoda = true;
+				// 		}
+				// 	}
+				// }
+
+				PereborMassiva (cell);
+				cell.Clear ();;
 				gameObject.GetComponent<Figure> ().camera.GetComponent<Moves> ().enabled = false;
 				gameObject.GetComponent<Figure> ().moves = false;
 			}
