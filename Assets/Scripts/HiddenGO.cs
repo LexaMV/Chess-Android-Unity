@@ -44,18 +44,13 @@ public class HiddenGO : Photon.MonoBehaviour {
 
     static public HiddenGO Instance;
 	public int ahidden;
-	public int hidengoIDviewID;
-	public int whitefiguresIDviewID;
-	public int blackfiguresIDviewID;
 	void Start () {
 		tag = 0;
 	
 		Instance = this;
 		// этот код дл€ расстановки €чеек ввиде квадрата
         // if(PhotonNetwork.isMasterClient){ 
-			hidengoIDviewID = 100;
-			whitefiguresIDviewID = 200;
-			blackfiguresIDviewID = 300;
+			
 
 		digitint = -1;
 		x = 10.0f;
@@ -205,7 +200,7 @@ public class HiddenGO : Photon.MonoBehaviour {
 
 		foreach (GameObject go in hiddengo) {
 
-			if (go.name.Contains ("2")) {
+			if (go.name.Contains ("2") && Network.Instance.VibralWhite == 1) {
 
 				// GameObject pawnwhite = Instantiate (whitepawn, go.transform.position, Quaternion.identity, figures.transform);
 				// GameObject pawnwhite = PhotonNetwork.Instantiate(whitepawn.name, go.transform.position, Quaternion.identity, 0);
@@ -218,19 +213,32 @@ public class HiddenGO : Photon.MonoBehaviour {
 				whitefigures.Add (pawnwhite);
 			}
 
-			if (go.name.Contains ("7")) {
+			if (go.name.Contains ("2") && Network.Instance.VibralRed == 1) {
 
-				// GameObject pawnblack = PhotonNetwork.Instantiate (blackpawn.name, go.transform.position, Quaternion.identity, 0);
-				GameObject pawnblack = GameObject.Instantiate (blackpawn, go.transform.position, Quaternion.identity);
+				GameObject pawnwblack = GameObject.Instantiate(blackpawn, go.transform.position, Quaternion.identity);
 				tag = tag + 1;
-				pawnblack.name = "pawnblack" + tag.ToString();
-				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
-				// pawnblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
-				// pawnblack.transform.SetParent(figures.transform);
-				blackfigures.Add (pawnblack);
+				pawnwblack.name = "pawnwblack" + tag.ToString();
+				whitefigures.Add (pawnwblack);
 			}
 
-			if (go.name.Contains ("A1") || go.name.Contains ("H1")) {
+
+			if (go.name.Contains ("7") && Network.Instance.VibralRed == 1) {
+
+				 GameObject pawnwhite = GameObject.Instantiate(whitepawn, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				pawnwhite.name = "pawnwhite" + tag.ToString();
+				whitefigures.Add (pawnwhite);
+			}
+			
+
+			if (go.name.Contains ("7") && Network.Instance.VibralWhite == 1) {
+	           	GameObject pawnwblack = GameObject.Instantiate(blackpawn, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				pawnwblack.name = "pawnwblack" + tag.ToString();
+				whitefigures.Add (pawnwblack);
+			}
+
+			if ((go.name.Contains ("A1") || go.name.Contains ("H1")) && Network.Instance.VibralWhite == 1) {
 
 				// GameObject rookwhite = PhotonNetwork.Instantiate (whiterook.name, go.transform.position, Quaternion.identity, 0);
 				GameObject rookwhite = GameObject.Instantiate (whiterook, go.transform.position, Quaternion.identity);
@@ -242,7 +250,19 @@ public class HiddenGO : Photon.MonoBehaviour {
 				whitefigures.Add (rookwhite);
 			}
 
-			if (go.name.Contains ("A8") || go.name.Contains ("H8")) {
+			if ((go.name.Contains ("A1") || go.name.Contains ("H1")) && Network.Instance.VibralRed == 1) {
+				// GameObject rookblack = PhotonNetwork.Instantiate (blackrook.name, go.transform.position, Quaternion.identity, 0);
+				GameObject rookblack = GameObject.Instantiate (blackrook, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				rookblack.name = "rookblack" + tag.ToString();
+				// blackfiguresIDviewID = blackfiguresIDviewID +1;  
+				// rookblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
+				// rookblack.transform.SetParent(figures.transform);
+				blackfigures.Add (rookblack);
+				
+			}
+
+			if ((go.name.Contains ("A8") || go.name.Contains ("H8")) && Network.Instance.VibralWhite == 1)  {
  
 				// GameObject rookblack = PhotonNetwork.Instantiate (blackrook.name, go.transform.position, Quaternion.identity, 0);
 				GameObject rookblack = GameObject.Instantiate (blackrook, go.transform.position, Quaternion.identity);
@@ -254,7 +274,20 @@ public class HiddenGO : Photon.MonoBehaviour {
 				blackfigures.Add (rookblack);
 			}
 
-			if (go.name.Contains ("B1") || go.name.Contains ("G1")) {
+			if ((go.name.Contains ("A8") || go.name.Contains ("H8")) && Network.Instance.VibralRed == 1)  {
+ 
+				
+				// GameObject rookwhite = PhotonNetwork.Instantiate (whiterook.name, go.transform.position, Quaternion.identity, 0);
+				GameObject rookwhite = GameObject.Instantiate (whiterook, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				rookwhite.name = "rookwhite" + tag.ToString();
+				// whitefiguresIDviewID = whitefiguresIDviewID +1; 
+				// rookwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
+				// rookwhite.transform.SetParent(figures.transform);
+				whitefigures.Add (rookwhite);
+			}
+
+			if ((go.name.Contains ("B1") || go.name.Contains ("G1")) && Network.Instance.VibralWhite == 1) {
 
 				// GameObject horsewhite = PhotonNetwork.Instantiate (whitehorse.name, go.transform.position, Quaternion.identity, 0);
 				GameObject horsewhite = GameObject.Instantiate (whitehorse, go.transform.position, Quaternion.identity);
@@ -264,10 +297,23 @@ public class HiddenGO : Photon.MonoBehaviour {
 				// horsewhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
 				// horsewhite.transform.SetParent(figures.transform);
 				whitefigures.Add (horsewhite);
-				horsewhite.transform.Rotate (0, -90, 0);
+				 horsewhite.transform.Rotate (0, -90, 0);
 			}
 
-			if (go.name.Contains ("B8") || go.name.Contains ("G8")) {
+			if ((go.name.Contains ("B1") || go.name.Contains ("G1")) && Network.Instance.VibralRed == 1) {
+
+// GameObject horseblack = PhotonNetwork.Instantiate (blackhorse.name, go.transform.position, Quaternion.identity, 0);
+			    GameObject horseblack = GameObject.Instantiate (blackhorse, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				horseblack.name = "horseblack" + tag.ToString();
+				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
+				// horseblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
+				// horseblack.transform.SetParent(figures.transform);
+				blackfigures.Add (horseblack);
+				 horseblack.transform.Rotate (0, -90, 0);
+			}
+
+			if ((go.name.Contains ("B8") || go.name.Contains ("G8")) && Network.Instance.VibralWhite == 1) {
 
 				// GameObject horseblack = PhotonNetwork.Instantiate (blackhorse.name, go.transform.position, Quaternion.identity, 0);
 			    GameObject horseblack = GameObject.Instantiate (blackhorse, go.transform.position, Quaternion.identity);
@@ -279,7 +325,24 @@ public class HiddenGO : Photon.MonoBehaviour {
 				blackfigures.Add (horseblack);
 				horseblack.transform.Rotate (0, 90, 0);
 			}
-			if (go.name.Contains ("C1") || go.name.Contains ("F1")) {
+
+			
+			if ((go.name.Contains ("B8") || go.name.Contains ("G8")) && Network.Instance.VibralRed == 1) {
+
+		// GameObject horsewhite = PhotonNetwork.Instantiate (whitehorse.name, go.transform.position, Quaternion.identity, 0);
+				GameObject horsewhite = GameObject.Instantiate (whitehorse, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				horsewhite.name = "horsewhite" + tag.ToString();
+				// whitefiguresIDviewID = whitefiguresIDviewID +1; 
+				// horsewhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
+				// horsewhite.transform.SetParent(figures.transform);
+				whitefigures.Add (horsewhite);
+				horsewhite.transform.Rotate (0, 90, 0);
+			}
+
+
+
+			if ((go.name.Contains ("C1") || go.name.Contains ("F1"))  && Network.Instance.VibralWhite == 1) {
 
 				// GameObject bishopwhite = PhotonNetwork.Instantiate (whitebishop.name, go.transform.position, Quaternion.identity, 0);
 				GameObject bishopwhite = GameObject.Instantiate (whitebishop, go.transform.position, Quaternion.identity);
@@ -290,9 +353,9 @@ public class HiddenGO : Photon.MonoBehaviour {
 				// bishopwhite.transform.SetParent(figures.transform);
 				whitefigures.Add (bishopwhite);
 			}
-			if (go.name.Contains ("C8") || go.name.Contains ("F8")) {
 
-				// GameObject bishopblack = PhotonNetwork.Instantiate (blackbishop.name, go.transform.position, Quaternion.identity, 0);
+if ((go.name.Contains ("C1") || go.name.Contains ("F1"))  && Network.Instance.VibralRed == 1) {
+
 				GameObject bishopblack = GameObject.Instantiate (blackbishop, go.transform.position, Quaternion.identity);
 			
 				tag = tag + 1;
@@ -302,7 +365,38 @@ public class HiddenGO : Photon.MonoBehaviour {
 				// bishopblack.transform.SetParent(figures.transform);
 				blackfigures.Add (bishopblack);
 			}
-			if (go.name.Contains ("D1")) {
+
+
+
+			if ((go.name.Contains ("C8") || go.name.Contains ("F8")) && Network.Instance.VibralWhite == 1) {
+
+			 // GameObject bishopblack = PhotonNetwork.Instantiate (blackbishop.name, go.transform.position, Quaternion.identity, 0);
+				GameObject bishopblack = GameObject.Instantiate (blackbishop, go.transform.position, Quaternion.identity);
+			
+				tag = tag + 1;
+				bishopblack.name = "bishopblack" + tag.ToString();
+				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
+				// bishopblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
+				// bishopblack.transform.SetParent(figures.transform);
+				blackfigures.Add (bishopblack);
+			}
+
+				if ((go.name.Contains ("C8") || go.name.Contains ("F8")) && Network.Instance.VibralRed == 1) {
+
+				// GameObject bishopwhite = PhotonNetwork.Instantiate (whitebishop.name, go.transform.position, Quaternion.identity, 0);
+				GameObject bishopwhite = GameObject.Instantiate (whitebishop, go.transform.position, Quaternion.identity);
+				tag = tag + 1;
+				bishopwhite.name = "bishopwhite" + tag.ToString();
+				// whitefiguresIDviewID = whitefiguresIDviewID +1; 
+				// bishopwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
+				// bishopwhite.transform.SetParent(figures.transform);
+				whitefigures.Add (bishopwhite);
+			}
+
+
+
+
+			if (go.name.Contains ("D1") && Network.Instance.VibralWhite == 1) {
 
 				// GameObject queenwhite = PhotonNetwork.Instantiate (whitequeen.name, go.transform.position, Quaternion.identity, 0);
 				GameObject queenwhite = GameObject.Instantiate (whitequeen, go.transform.position, Quaternion.identity);
@@ -312,9 +406,10 @@ public class HiddenGO : Photon.MonoBehaviour {
 				// queenwhite.transform.SetParent(figures.transform);
 				whitefigures.Add (queenwhite);
 			}
-			if (go.name.Contains ("D8")) {
 
-				// GameObject kingblack =PhotonNetwork.Instantiate (blackking.name, go.transform.position, Quaternion.identity, 0);
+			if (go.name.Contains ("D1") && Network.Instance.VibralRed == 1) {
+
+		// GameObject kingblack =PhotonNetwork.Instantiate (blackking.name, go.transform.position, Quaternion.identity, 0);
 				GameObject kingblack = GameObject.Instantiate (blackking, go.transform.position, Quaternion.identity);
 				kingblack.name = "kingblack";
 				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
@@ -322,7 +417,41 @@ public class HiddenGO : Photon.MonoBehaviour {
 				// kingblack.transform.SetParent(figures.transform);
 				blackfigures.Add (kingblack);
 			}
-			if (go.name.Contains ("E1")) {
+
+
+
+			if (go.name.Contains ("D8")  && Network.Instance.VibralWhite == 1) {
+
+				GameObject queenblack = GameObject.Instantiate (blackqueen, go.transform.position, Quaternion.identity);
+				queenblack.name = "queenblack";
+				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
+				// queenblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
+				// queenblack.transform.SetParent(figures.transform);
+				blackfigures.Add (queenblack);
+			}
+
+			
+			if (go.name.Contains ("D8")  && Network.Instance.VibralRed == 1) {
+
+			// // GameObject kingblack =PhotonNetwork.Instantiate (blackking.name, go.transform.position, Quaternion.identity, 0);
+			// 	GameObject kingblack = GameObject.Instantiate (blackking, go.transform.position, Quaternion.identity);
+			// 	kingblack.name = "kingblack";
+			// 	// blackfiguresIDviewID = blackfiguresIDviewID +1; 
+			// 	// kingblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
+			// 	// kingblack.transform.SetParent(figures.transform);
+			// 	blackfigures.Add (kingblack);
+
+			// GameObject kingwhite = PhotonNetwork.Instantiate (whiteking.name, go.transform.position, Quaternion.identity, 0);
+				GameObject kingwhite = GameObject.Instantiate (whiteking, go.transform.position, Quaternion.identity);
+				kingwhite.name = "kingwhite";
+			    // whitefiguresIDviewID = whitefiguresIDviewID +1;  
+				// kingwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
+				// kingwhite.transform.SetParent(figures.transform);
+				whitefigures.Add (kingwhite);
+			}
+
+
+			if (go.name.Contains ("E1") && Network.Instance.VibralWhite == 1) {
 
 				// GameObject kingwhite = PhotonNetwork.Instantiate (whiteking.name, go.transform.position, Quaternion.identity, 0);
 				GameObject kingwhite = GameObject.Instantiate (whiteking, go.transform.position, Quaternion.identity);
@@ -332,7 +461,16 @@ public class HiddenGO : Photon.MonoBehaviour {
 				// kingwhite.transform.SetParent(figures.transform);
 				whitefigures.Add (kingwhite);
 			}
-			if (go.name.Contains ("E8")) {
+
+if (go.name.Contains ("E1") && Network.Instance.VibralRed == 1) {
+
+				// // GameObject kingwhite = PhotonNetwork.Instantiate (whiteking.name, go.transform.position, Quaternion.identity, 0);
+				// GameObject kingwhite = GameObject.Instantiate (whiteking, go.transform.position, Quaternion.identity);
+				// kingwhite.name = "kingwhite";
+			    // // whitefiguresIDviewID = whitefiguresIDviewID +1;  
+				// // kingwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
+				// // kingwhite.transform.SetParent(figures.transform);
+				// whitefigures.Add (kingwhite);
 
 				// GameObject queenblack = PhotonNetwork.Instantiate (blackqueen.name, go.transform.position, Quaternion.identity,0);
 				GameObject queenblack = GameObject.Instantiate (blackqueen, go.transform.position, Quaternion.identity);
@@ -342,6 +480,33 @@ public class HiddenGO : Photon.MonoBehaviour {
 				// queenblack.transform.SetParent(figures.transform);
 				blackfigures.Add (queenblack);
 			}
+
+			if (go.name.Contains ("E8") && Network.Instance.VibralRed == 1) {
+
+				// // GameObject queenblack = PhotonNetwork.Instantiate (blackqueen.name, go.transform.position, Quaternion.identity,0);
+				// GameObject queenblack = GameObject.Instantiate (blackqueen, go.transform.position, Quaternion.identity);
+				// queenblack.name = "queenblack";
+				// // blackfiguresIDviewID = blackfiguresIDviewID +1; 
+				// // queenblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
+				// // queenblack.transform.SetParent(figures.transform);
+				// blackfigures.Add (queenblack);
+
+				GameObject queenwhite = GameObject.Instantiate (whitequeen, go.transform.position, Quaternion.identity);
+				queenwhite.name = "queenwhite";
+				// whitefiguresIDviewID = whitefiguresIDviewID +1;  
+				// queenwhite.GetComponent<PhotonView>().viewID = whitefiguresIDviewID;
+				// queenwhite.transform.SetParent(figures.transform);
+				whitefigures.Add (queenwhite);
+			}
+
+				if (go.name.Contains ("E8") && Network.Instance.VibralWhite == 1) {
+					GameObject kingblack = GameObject.Instantiate (blackking, go.transform.position, Quaternion.identity);
+				kingblack.name = "kingblack";
+				// blackfiguresIDviewID = blackfiguresIDviewID +1; 
+				// kingblack.GetComponent<PhotonView>().viewID = blackfiguresIDviewID;
+				// kingblack.transform.SetParent(figures.transform);
+				blackfigures.Add (kingblack);
+				}
   		}
 
       GameObject.Find("GameCamera").GetComponent<Figure>().enabled = true;

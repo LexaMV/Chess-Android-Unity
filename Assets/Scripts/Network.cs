@@ -22,6 +22,9 @@ public class Network : PunBehaviour {
     public string RedGOString;
     public string WhiteGOString;
 
+    public int VibralRed;
+    public int VibralWhite;
+
     // public PunTurnManager turnManager;
 
 	// Use this for initialization
@@ -108,11 +111,16 @@ public class Network : PunBehaviour {
         
     RedGOString = "RedGO";
     int a = 1;
-    object[] content = new object[] {RedGOString, a};
+    VibralRed = 0;
+    VibralWhite = 1;
+    object[] content = new object[] {RedGOString, a,VibralWhite, VibralRed};
+   
 			//  Debug.Log(RaiseEventMassiv.Count);
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
 			PhotonNetwork.RaiseEvent(RedGOPlay,content,true, raiseEventOptions);
+             VibralRed = 1;
+    VibralWhite = 0;
               RedGOString = null;
             Background.SetActive(true);
             CanvasViboraXoda.SetActive(false);
@@ -127,11 +135,17 @@ public class Network : PunBehaviour {
           
      WhiteGOString = "WhiteGO";
      int a = 1;
-     object[] content = new object[] {WhiteGOString, a};
+     VibralWhite = 0;
+     VibralRed  = 1;
+
+     object[] content = new object[] {WhiteGOString, a, VibralWhite, VibralRed};
+    
 			//  Debug.Log(RaiseEventMassiv.Count);
 	         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             //  PhotonNetwork.RaiseEvent(RaiseEventClient,RaiseEventMassiv,true, raiseEventOptions);
 			PhotonNetwork.RaiseEvent(WhiteGOPlay,content,true, raiseEventOptions);
+             VibralWhite = 1;
+     VibralRed  = 0;
             // WhiteGO.SetActive(false);
             WhiteGOString = null;
             Background.SetActive(true);
@@ -242,6 +256,8 @@ public class Network : PunBehaviour {
 		object[] data = (object[])content;
     RedGOString = (string)data[0];
     i = (int)data[1];
+    VibralWhite = (int)data[2];
+    VibralRed = (int)data[3];
 	Debug.LogWarning("RedGo");
 			// Do something
 	}
@@ -250,6 +266,8 @@ public class Network : PunBehaviour {
 	object[] data = (object[])content;
     WhiteGOString = (string)data[0];
     i = (int)data[1];
+    VibralWhite = (int)data[2];
+    VibralRed = (int)data[3];
 	Debug.LogWarning("WhiteGo");
 			// Do something
 	}
