@@ -60,7 +60,18 @@ public class HiddenGO : Photon.MonoBehaviour {
 		GameObject figures = GameObject.Find ("Figures");
 		// hiddengo = new GameObject[8, 8];
 
-		for (int i = 0; i < 8; i++) {
+		if(Network.Instance.VibralRed == 1){
+			 GameObject.Find("GameCamera").transform.position = new Vector3(-60.3f,187.6f,-74.2f);
+			//  GameObject.Find("GameCamera").transform.rotation = Quaternion.AngleAxis(10,Vector3.left);
+			//  GameObject.Find("GameCamera").transform.rotation = Quaternion.AngleAxis(10,Vector3.up);
+			//  GameObject.Find("GameCamera").transform.rotation = Quaternion.AngleAxis(180,Vector3.z) * GameObject.Find("GameCamera").transform.rotation;
+GameObject.Find("GameCamera").transform.RotateAround(GameObject.Find("GameCamera").transform.position,Vector3.up,176);
+GameObject.Find("GameCamera").transform.RotateAround(GameObject.Find("GameCamera").transform.position,Vector3.left,-2.8f);
+
+		}
+
+		for (int i = 7; i > -1; i--) {
+			//  for (int i = 0; i < 8; i++) {
 			digitint += 1;
 			if (i == 0) {
 				black = false;
@@ -74,8 +85,8 @@ public class HiddenGO : Photon.MonoBehaviour {
 				black = true;
 			}
 			
-			for (int j = 0; j < 8; j++) {
-
+			// for (int j = 7; j > -1; j--) {
+                for (int j = 0; j < 8; j++) {
 				if (black == false) {
 					// GameObject cell = PhotonNetwork.Instantiate (PrefabCell1.name, new Vector3 (x, y, z), Quaternion.identity, 0);
 					GameObject cell = GameObject.Instantiate (PrefabCell1, new Vector3 (x, y, z), Quaternion.identity);
@@ -207,13 +218,13 @@ public class HiddenGO : Photon.MonoBehaviour {
 				GameObject pawnwhite = GameObject.Instantiate(whitepawn, go.transform.position, Quaternion.identity);
 				tag = tag + 1;
 
-				if(Network.Instance.VibralRed == 1){
-				pawnwhite.GetComponent<MeshRenderer>().sharedMaterial.color = Color.red;
-				}
+				// if(Network.Instance.VibralRed == 1){
+				// pawnwhite.GetComponent<MeshRenderer>().sharedMaterial.color = Color.red;
+				// }
 
-				if(Network.Instance.VibralWhite == 1){
-				pawnwhite.GetComponent<MeshRenderer>().sharedMaterial.color = Color.white;
-				}
+				// if(Network.Instance.VibralWhite == 1){
+				// pawnwhite.GetComponent<MeshRenderer>().sharedMaterial.color = Color.white;
+				// }
 
 				pawnwhite.name = "pawnwhite" + tag.ToString();
 				// whitefiguresIDviewID = whitefiguresIDviewID +1; 
@@ -236,13 +247,13 @@ public class HiddenGO : Photon.MonoBehaviour {
 				GameObject pawnwblack = GameObject.Instantiate(blackpawn, go.transform.position, Quaternion.identity);
 				tag = tag + 1;
 
-if(Network.Instance.VibralRed == 0){
-				pawnwblack.GetComponent<MeshRenderer>().sharedMaterial.color = Color.red;
-				}
+// if(Network.Instance.VibralRed == 0){
+// 				pawnwblack.GetComponent<MeshRenderer>().sharedMaterial.color = Color.red;
+// 				}
 
-				if(Network.Instance.VibralWhite == 0){
-				pawnwblack.GetComponent<MeshRenderer>().sharedMaterial.color = Color.white;
-				}
+// 				if(Network.Instance.VibralWhite == 0){
+// 				pawnwblack.GetComponent<MeshRenderer>().sharedMaterial.color = Color.white;
+// 				}
 
 				pawnwblack.name = "pawnwblack" + tag.ToString();
 				whitefigures.Add (pawnwblack);
